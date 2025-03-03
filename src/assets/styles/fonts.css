@@ -1,0 +1,42 @@
+/* src/font.css */
+@font-face {
+  font-family: 'Arabato';
+  src: url('../fonts/Araboto\ Bold\ 400.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Arabato';
+  src: url('../fonts/Araboto\ Light\ 400.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GeistMonoVF';
+  src: url('../fonts/GeistMonoVF.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Arabato';
+  src: url('../fonts/Araboto\ Medium\ 400.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Arabato';
+  src: url('../fonts/Araboto\ Normal\ 400.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Arabato';
+  src: url('../fonts//Araboto\ Thin\ 400.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}

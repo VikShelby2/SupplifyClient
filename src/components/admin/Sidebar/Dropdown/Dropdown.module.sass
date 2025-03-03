@@ -1,0 +1,209 @@
+@import ../../../../assets/styles/helpers
+
+.dropdown
+    &.active
+        .head
+            svg
+                &:last-child
+                    transform: rotate(180deg)
+        .body
+            display: block
+            +d
+                display: none
+            +m
+                display: block
+    &.wide
+        +d
+            .head
+                font-size: 15px
+                svg
+                    &:first-child
+                        +d
+                            margin-right: 12px
+                    &:last-child
+                        +d
+                            display: inline-block
+            .add
+                display: flex
+    &.wide.active
+        .body
+            +d
+                display: block
+
+.top
+    position: relative
+    &.active
+        .head
+            background: $n3
+            box-shadow: inset 0px -2px 1px rgba(0, 0, 0, 0.05), inset 0px 1px 1px #FFFFFF
+            color: $n7
+            +dark
+                background: $n6
+                box-shadow: inset 0px -2px 1px rgba(0, 0, 0, 0.4), inset 0px 1px 1px rgba(255, 255, 255, 0.11)
+                color: $n1
+
+.head
+    display: flex
+    align-items: center
+    width: 100%
+    height: 48px
+    padding: 0 12px
+    border-radius: 12px
+    white-space: nowrap
+    +base1-s
+    color: $n4
+    -webkit-tap-highlight-color: rgba(0,0,0,0)
+    transition: background .2s, box-shadow .2s, color .2s
+    +d
+        font-size: 0
+    +m
+        font-size: 15px
+    &:hover
+        color: $n7
+        svg
+            fill: $n7
+        +dark
+            color: $n1
+            svg
+                fill: $n1
+    &.active:not(.wide)
+        +d
+            background: $n3
+            box-shadow: inset 0px -2px 1px rgba(0, 0, 0, 0.05), inset 0px 1px 1px #FFFFFF
+            color: $n7
+        +m
+            background: none
+            box-shadow: none
+            color: $n4
+        +dark
+            +d
+                background: $n6
+                box-shadow: inset 0px -2px 1px rgba(0, 0, 0, 0.4), inset 0px 1px 1px rgba(255, 255, 255, 0.11)
+                color: $n1
+                svg
+                    fill: $n1
+            +m
+                background: none
+                box-shadow: none
+                color: $n4
+                svg
+                    fill: $n4
+    svg
+        flex-shrink: 0
+        fill: $n4
+        transition: transform .2s, fill .2s
+        &:first-child
+            margin-right: 12px
+            +d
+                margin-right: 0
+            +m
+                margin-right: 12px
+        &:last-child
+            margin-left: auto
+            +d
+                display: none
+            +m
+                display: inline-block
+
+.add
+    position: absolute
+    top: 50%
+    display: flex
+    justify-content: center
+    align-items: center
+    right: 48px
+    width: 24px
+    height: 24px
+    border-radius: 50%
+    border: 2px solid $n3
+    transform: translateY(-50%)
+    font-size: 0
+    transition: border-color .2s 
+    +d
+        display: none
+    +m
+        display: flex
+    +dark
+        border-color: $n5
+    svg
+        fill: $n4
+        transition: fill .2s
+    &:hover
+        border-color: $n7
+        svg
+            fill: $n7
+        +dark
+            border-color: $shades1
+            svg
+                fill: $shades1
+    &.active
+        border-color: $shades1
+        svg
+            fill: $shades1
+
+.body
+    position: relative
+    display: none
+    padding-left: 36px
+    &:before
+        content: ""
+        position: absolute
+        top: 0
+        left: 23px
+        bottom: 32px
+        width: 2px
+        border-radius: 2px
+        background: $n3
+        +dark
+            background: $n6
+
+.link
+    position: relative
+    display: flex
+    align-items: center
+    height: 48px
+    padding: 0 12px
+    border-radius: 12px
+    color: $n4
+    -webkit-tap-highlight-color: rgba(0,0,0,0)
+    transition: background .2s, box-shadow .2s, color .2s
+    &:before
+        content: ""
+        position: absolute
+        top: 12px
+        left: -13px
+        width: 12px
+        height: 12px
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' viewBox='0 0 14 14'%3E%3Cpath d='M1 1v4a8 8 0 0 0 8 8h4' stroke='%23efefef' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 50% 50% / 100% auto
+        +dark
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' viewBox='0 0 14 14'%3E%3Cpath d='M1 1v4a8 8 0 0 0 8 8h4' stroke='%23272B30' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E")
+    svg
+        margin-left: auto
+        opacity: 0
+        fill: $n7
+        transition: opacity .2s
+        +dark
+            fill: $n1
+    &:hover
+        color: $n7
+        +dark
+            color: $n1
+    &.active
+        background: $n3
+        box-shadow: inset 0px -2px 1px rgba(0, 0, 0, 0.05), inset 0px 1px 1px #FFFFFF
+        color: $n7
+        +dark
+            background: $n6
+            box-shadow: inset 0px -2px 1px rgba(0, 0, 0, 0.4), inset 0px 1px 1px rgba(255, 255, 255, 0.11)
+            color: $n1
+        svg
+            opacity: 1
+
+.counter
+    flex-shrink: 0
+    min-width: 24px
+    margin-left: auto
+    border-radius: 6px
+    text-align: center
+    line-height: 24px
+    color: $n7

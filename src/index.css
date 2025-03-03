@@ -1,0 +1,417 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+:root{
+  --btn-box-shadow-black:  0rem -.0625rem 0rem 0rem #424242 inset, 0rem 0rem 0rem .0625rem rgba(0, 0, 0, .1) inset, 0rem .03125rem 0rem .09375rem #000000 inset;
+  --btn-box-shadow-white:  0rem -.0625rem 0rem 0rem #b5b5b5 inset, 0rem 0rem 0rem .0625rem rgba(0, 0, 0, .1) inset, 0rem .03125rem 0rem .09375rem #FFF inset;
+  --btn-box-shadow-active: -.0625rem 0rem .0625rem 0rem rgba(26, 26, 26, .122) inset, .0625rem 0rem .0625rem 0rem rgba(26, 26, 26, .122) inset, 0rem .125rem .0625rem 0rem rgba(26, 26, 26, .2) inset;
+--btn-bg-color-fill: linear-gradient(180deg, rgba(48, 48, 48, 0) 63.53%, rgba(255, 255, 255, .15) 100%);   
+ --btn-fill-brand: rgba(48, 48, 48, 1);
+ --sp-font-sans: "Inter", -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, "Helvetica Neue", sans-serif ;
+ --sp-font-mono:  ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+ --sidebar-background: 0 0% 98%;
+ --sidebar-foreground: 240 5.3% 26.1%;
+ --sidebar-primary: 240 5.9% 10%;
+ --sidebar-primary-foreground: 0 0% 98%;
+ --sidebar-accent: 240 4.8% 95.9%;
+ --sidebar-accent-foreground: 240 5.9% 10%;
+ --sidebar-border: 220 13% 91%;
+ --sidebar-ring: 217.2 91.2% 59.8%;
+ --background: 0 0% 100%;
+ --foreground: 222.2 47.4% 11.2%;
+
+ --muted: 210 40% 96.1%;
+ --muted-foreground: 215.4 16.3% 46.9%;
+
+ --popover: 0 0% 100%;
+ --popover-foreground: 222.2 47.4% 11.2%;
+
+ --border: 214.3 31.8% 91.4%;
+ --input: 214.3 31.8% 91.4%;
+
+ --card: 0 0% 100%;
+ --card-foreground: 222.2 47.4% 11.2%;
+
+ --primary: 222.2 47.4% 11.2%;
+ --primary-foreground: 210 40% 98%;
+
+ --secondary: 210 40% 96.1%;
+ --secondary-foreground: 222.2 47.4% 11.2%;
+
+ --accent: 210 40% 96.1%;
+ --accent-foreground: 222.2 47.4% 11.2%;
+
+ --destructive: 0 100% 50%;
+ --destructive-foreground: 210 40% 98%;
+
+ --ring: 215 20.2% 65.1%;
+ --color-1: 0 100% 63%;
+  --color-2: 270 100% 63%;
+  --color-3: 210 100% 63%;
+  --color-4: 195 100% 63%;
+  --color-5: 90 100% 63%;
+ --radius: 0.5rem;
+}
+#root{
+  
+
+}
+.auth_layout{
+  background-color:hsla(0,0%,100%,1);
+background-image:
+radial-gradient(at 17% 0%,hsla(281deg,0%,94%,1) 0,transparent 50%),radial-gradient(at 98% 1%,hsla(300deg,0%,94%,1) 0,transparent 50%),radial-gradient(at 33% 87%,hsla(300deg,0%,94%,1) 0,transparent 50%),radial-gradient(at 65% 86%,hsla(300deg,0%,94%,1) 0,transparent 50%),radial-gradient(at 61% 21%,hsla(300deg,0%,94%,1) 0,transparent 50%),radial-gradient(at 36% 1%,hsla(300deg,0%,94%,1) 0,transparent 50%),radial-gradient(at 31% 31%,hsla(248deg,100%,66%,.8) 0,transparent 50%),radial-gradient(at 42% 32%,hsla(248deg,83%,76%,1) 0,transparent 50%),radial-gradient(at 0% 1%,hsla(300deg,0%,94%,1) 0,transparent 50%),radial-gradient(at 10% 66%,hsla(300deg,0%,94%,1) 0,transparent 50%),radial-gradient(at 64% 56%,hsl(222.1, 100%, 57.3%) 0,transparent 50%),radial-gradient(at 68% 46%,hsla(180deg,43%,53%,1) 0,transparent 50%),radial-gradient(at 99% 98%,hsla(300deg,0%,94%,1) 0,transparent 50%),radial-gradient(at 67% 59%,hsla(194deg,100%,73%,1) 0,transparent 50%)
+
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+--ds-alpha-100:rgba(0,0,0,0.05) ;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --ring: 215 20.2% 65.1%;
+
+    --radius: 0.5rem;
+  }
+
+  
+}
+
+
+.resizable-image {
+  position: relative;
+  display: inline-block;
+  resize: both;
+  overflow: auto;
+  max-width: 100%;
+  height: auto;
+  min-width: 50px;
+  min-height: 50px;
+  border: 1px dashed #ddd;
+}
+.resizable-image::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  bottom: 0;
+  right: 0;
+  cursor: nwse-resize;
+  background-color: gray;
+  border-radius: 50%;
+}
+/* From Uiverse.io by PhanDangKhoa96 */ 
+.container {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+}
+
+.wrapper {
+  isolation: isolate;
+  overflow: hidden;
+  position: relative;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.input-wrapper {
+  isolation: isolate;
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  opacity: 0.7;
+  width: 32px;
+  height: 32px;
+  translate: 0 -50%;
+}
+
+.input-wrapper input {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-right: 5rem;
+  padding-left: 5rem;
+  outline-style: none;
+  width: 100%;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  background-color: #000000;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  color: white;
+}
+
+
+
+.pink-overlay {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  border-radius: 9999px;
+  width: 5rem;
+  height: 5rem;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  transition-duration: 500ms;
+  opacity: 1;
+  filter: blur(24px) drop-shadow(0 0 60px #b43598);
+  background: #b43598;
+  z-index: -10;
+  translate: 0 -50%;
+}
+
+.blue-overlay {
+  position: absolute;
+  right: -1.25rem;
+  top: 66.666667%;
+  border-radius: 9999px;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  transition-duration: 500ms;
+  opacity: 1;
+  filter: blur(24px) drop-shadow(0 0 60px #120d57);
+  height: 100px;
+  width: 100px;
+  z-index: -10;
+  background: #120d57;
+  translate: 0 -50%;
+}
+
+.gradient-box {
+  --border-angle: 0turn;
+  --main-bg: conic-gradient(
+    from var(--border-angle),
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.1) 100%
+  );
+
+  --gradient-border: conic-gradient(
+    from var(--border-angle),
+    transparent 25%,
+    white 28%,
+    transparent 30%,
+    transparent 60%,
+    transparent 73%,
+    white 78%,
+    transparent 80%
+  );
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  border-color: transparent;
+  border-style: solid;
+  height: calc(100% + 4px);
+  width: calc(100% + 4px);
+  border-width: 2px;
+  filter: blur(2px);
+  z-index: -10;
+  border-radius: 20px;
+  background: var(--main-bg) padding-box, var(--gradient-border) border-box,
+    var(--main-bg) border-box;
+  background-position: center center;
+  animation: bg-spin 5s linear infinite forwards;
+}
+
+.input-wrapper:hover .pink-overlay {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  filter: blur(1px) drop-shadow(0 0 0 #b43598);
+}
+
+.input-wrapper:hover .blue-overlay {
+  top: 50%;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  filter: blur(1px) drop-shadow(0 0 0 #120d57);
+}
+
+.input-wrapper:hover .gradient-box {
+  animation: bg-spin 5s linear infinite forwards;
+}
+
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
+.grid-layout {
+  display: grid;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  scale: 1.1;
+  z-index: -10;
+  grid-template-columns: repeat(30, minmax(0, 1fr));
+  translate: -50% -50%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  gap: 1px;
+}
+
+.grid-layout .aspect-square {
+  aspect-ratio: 1/1;
+  background: black;
+}
+
+.oval-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -10;
+}
+
+.oval-overlay .shadow {
+  height: 100%;
+  width: 100%;
+  scale: 1.1;
+  border-radius: 50%;
+  box-shadow: 0 0 20px 20px #000 inset;
+}
+
+
+.alpha{
+  background-color:var(--ds-alpha-100);
+}
+
+@keyframes pulseGradient {
+  0% {
+    background-size: 100% 100%;
+    opacity: 1;
+  }
+  50% {
+    background-size: 155% 155%;
+    opacity: 0.8;
+  }
+  100% {
+    background-size: 100% 100%;
+    opacity: 1;
+  }
+}
+
+.pulsing-gradient {
+  background-color:hsla(0,0%,100%,1);
+background-image:radial-gradient(at 17% 0%, hsla(281deg, 0%, 94%, 1) 0, transparent 50%),
+              radial-gradient(at 98% 1%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%),
+              radial-gradient(at 33% 87%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%),
+              radial-gradient(at 65% 86%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%),
+              radial-gradient(at 61% 21%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%),
+              radial-gradient(at 36% 1%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%),
+              radial-gradient(at 31% 31%, hsla(248deg, 100%, 66%, 0.8) 0, transparent 50%),
+              radial-gradient(at 42% 32%, hsla(248deg, 83%, 76%, 1) 0, transparent 50%),
+              radial-gradient(at 0% 1%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%),
+              radial-gradient(at 10% 66%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%),
+              radial-gradient(at 64% 56%, hsl(222.1, 100%, 57.3%) 0, transparent 50%),
+              radial-gradient(at 68% 46%, hsla(180deg, 43%, 53%, 1) 0, transparent 50%),
+              radial-gradient(at 99% 98%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%),
+              radial-gradient(at 67% 59%, hsla(194deg, 100%, 73%, 1) 0, transparent 50%);
+  animation: pulseGradient 5s infinite alternate ease-in-out;
+}
+.filter-btn {
+  aspect-ratio: 1/1;
+  display: grid;
+  place-items: center;
+  border-radius: 0.75rem;
+  border-style: solid;
+  transition: background-color 150ms ease, border-color 150ms ease;
+  cursor: pointer;
+  border: 2px solid #313131;
+  width: 38px;
+  height: 38px;
+  background-color: #1a1a1a;
+}
+
+.filter-btn svg {
+  width: 32px;
+  height: 32px;
+  transition: stroke 150ms ease, opacity 150ms ease;
+  opacity: 0.7;
+}
+
+/* Hover effect */
+.filter-btn:hover {
+  background-color: #2a2a2a;
+}
+
+.filter-btn:hover svg {
+  stroke: white;
+}
+
+/* Pressed effect like Shopify buttons */
+.filter-btn:active {
+  background-color: #0c0c0c; /* Darker background when clicked */
+  border-color: #0a0a0a; /* Slightly darker border */
+}
+
+.filter-btn:active svg {
+  stroke: #bfbfbf; /* Lightened stroke color */
+  opacity: 1;
+}
+
+
