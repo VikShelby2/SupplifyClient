@@ -2,30 +2,23 @@ import React from 'react';
 
 import ReactDOM from 'react-dom/client';
 
-import './index.css';
+import './assets/styles/index.css';
 import './assets/private/store/products/addproduct.css'
 import './assets/styles/fonts.css'
-import './App.css';
+import './assets/styles/App.css';
+import {addToast, ToastProvider} from "@heroui/toast";
 import { NextUIProvider } from '@nextui-org/react';
-import reportWebVitals from './reportWebVitals';
 import { RecoilRoot } from 'recoil';
+import {HeroUIProvider} from "@heroui/react";
 import Root from './Root';
-import Toaster from 'react-hot-toast'
-import { SidebarProvider } from './components/ui/shadcn/sidebar';
 import { Provider } from 'react-redux';
 import store from './context/redux/store';
+import Providers from './providers';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-   <NextUIProvider>
-
-  <RecoilRoot> 
-  <Provider store={store}>
-  <Toaster/>
-    <Root />
-    </Provider>
-    </RecoilRoot> 
-    
-    </NextUIProvider>
+   <Providers>
+    <Root/>
+   </Providers>
   </React.StrictMode>
 );

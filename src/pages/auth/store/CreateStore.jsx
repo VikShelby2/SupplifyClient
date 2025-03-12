@@ -1,28 +1,29 @@
 import React, { useEffect, useState } from "react";
-import {  useRecoilValue, useSetRecoilState } from "recoil";
-import { storeAtom } from "../../../context/atoms/storeAtom";
-import { MultiStepCard } from "./components/MultiStepCard";
-import {useNavigate} from 'react-router-dom'
-import userAtom from "../../../context/atoms/userAtom";
-import loadingAtom from "../../../context/atoms/loadingAtom";
-import { FirstStep, SecondStep, StoreForm, ThirdStep } from "./components/steps/steps";
+
 import { MorphingText } from "../../../components/ui/morphyne-text";
 import { HoverEffectContainer } from "../../../components/ui/tabssp";
-import {Branding, Budged, Describe, Market, ProductsChoice, SellPosition} from "./components/analyticChoice";
+import {Branding, Describe, Market, ProductsChoice, SellPosition} from "./components/analyticChoice";
+import { useSelector } from "react-redux";
+import StoreForm from "./components/storeForm";
 
 
 
+export default function CreateStore({}){
+  const [animationTime , setAnimationTime] = useState('5s')
+  const [style , setSyle] = useState(
+    {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center" ,
+       overflow: "hidden" ,
+      backgroundColor:' hsla(0,0%,100%,1) ' ,
+     minHeight: "100vh" ,
+    backgroundImage: ' radial-gradient(at 17% 0%, hsla(281deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 98% 1%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 33% 87%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 65% 86%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 61% 21%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 36% 1%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 31% 31%, hsla(248deg, 100%, 66%, 0.8) 0, transparent 50%), radial-gradient(at 42% 32%, hsla(248deg, 83%, 76%, 1) 0, transparent 50%), radial-gradient(at 0% 1%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 10% 66%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 64% 56%, hsl(222.1, 100%, 57.3%) 0, transparent 50%), radial-gradient(at 68% 46%, hsla(180deg, 43%, 53%, 1) 0, transparent 50%), radial-gradient(at 99% 98%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 67% 59%, hsla(194deg, 100%, 73%, 1) 0, transparent 50%)' ,
+    animation: `pulseGradient 5s infinite alternate ease-in-out`
+    }
+  )
 
-const DummyContent = () => {
-  return (
-  <>
   
-  </>
-  );
-};
-
-
-export default function CreateStore(){
   const switchTab = (index , tabs , setTabs , setCurrentTab) => {
     // Move the selected tab to the front
     const reorderedTabs = [
@@ -32,6 +33,7 @@ export default function CreateStore(){
     setTabs(reorderedTabs); // Update the tabs with the reordered list
     setCurrentTab(0); // The selected tab is now the first one
   };
+  const [showStoreForm , setShowForm] = useState(false)
   const switchTabBackward = (index, tabs, setTabs, setCurrentTab) => {
     // Move the selected tab to the previous position (backwards)
     const reorderedTabs = [
@@ -44,6 +46,7 @@ export default function CreateStore(){
   
   const [showMessage, setShowMessage] = useState(true);
   const [onlyVisible , setOnlyVisible] = useState(0)
+const {user , isAuthinticated} = useSelector((state)=>state.user)
 
   const tabsCon = [
     {
@@ -78,13 +81,13 @@ export default function CreateStore(){
       title: "Random",
       value: "random",
       content: (
-        <Branding back={()=>switchTabBackward(3 , tabs  , setTabs ,setCurrentTab )} next={()=>switchTab(4 , tabs  , setTabs ,setCurrentTab )} />
+        <Branding back={()=>switchTabBackward(3 , tabs  , setTabs ,setCurrentTab )} next={()=>setShowForm(true)} />
       ),
     },
   ];
   const [tabs , setTabs] = useState(tabsCon)
   const [currentTab, setCurrentTab] = useState(0); 
-    useEffect(()=>{console.log(currentTab)} , [currentTab])
+  useEffect(()=>{console.log(currentTab)} , [currentTab])
   useEffect(() => {
   
     const timer = setTimeout(() => {
@@ -95,70 +98,10 @@ export default function CreateStore(){
     return () => clearTimeout(timer);
   }, []);
 
-const [image, setImage] = useState(null); 
-const navigate = useNavigate()
-const setLoading = useSetRecoilState(loadingAtom);
-const setUser = useSetRecoilState(userAtom)
-const user = useRecoilValue(userAtom)
-useEffect(()=>{
-console.log(user)
-},[user])   
-const setStore = useSetRecoilState(storeAtom)
-const [input, setInput] = useState({
-  storeLocation: '',
-  storeName: '',
-  ...(user && { userId: user._id }) ,
-  storeCurrency: ''  , 
-  locationFlag: '' , 
-  
-});
-useEffect(()=>{console.log(input)} , [input])
-
- const buildStore = async () =>{
- setLoading(true)
-  try{
-   const res = await fetch("http://localhost:8080/api/add-store" , {
-      method: 'POST' ,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(input),
-   })
-   const data = await res.json();
-    if (data.error) {
-      console.log("Error", data.error, "error");
-      setLoading(false);
-      return;
-    }
-    
-    localStorage.removeItem('store');
-    localStorage.setItem("store", JSON.stringify(data));
-    setStore(data)
-    console.log(data)
-   navigate(`/store-panel/${data._id}/home`)
-    setLoading(false)
-  }
-  catch(error){
-    console.log("Error", error, "error");
-    setLoading(false);
-  }
-
-}
-const token = localStorage.getItem('user-threads')
- const handleSetStoreData = () => {
-    setStore((prevUser) => ({
-      ...prevUser,
-      ...input
-    }))
-    if (token === null) {
-    setUser(null)
-      navigate('/signup');
-  } else {
-     console.log(input)
-     buildStore()
-    }
-     
-    }
+  useEffect(() => {
+    console.log("Animation Time updated:", animationTime);
+ }, [animationTime]);
+ 
   const message = [
     'Welcome' ,
     'To' ,
@@ -166,22 +109,15 @@ const token = localStorage.getItem('user-threads')
   ]
    return(
   <div 
-  className="pulsing-gradient"
-   style={{
-        
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center" ,
-         overflow: "hidden"
-      }}
+  className=""
+   style={style}
   >
     {
       showMessage && (
         <MorphingText texts={message} />
       )
     }
-    {!showMessage && (
+    {!showMessage && !showStoreForm && (
       <div className="h-[20rem] md:h-[40rem] justify-center items-center [perspective:1000px] relative b flex flex-col max-w-5xl mx-auto w-full  my-40 mt-0">
        <HoverEffectContainer
         setTabs={setTabs}
@@ -194,7 +130,9 @@ const token = localStorage.getItem('user-threads')
       />
     </div>
     )}
-  
+    {!showMessage && showStoreForm && (
+      <StoreForm setAnimationTime={setSyle} />
+    )}
   
   </div>
     )

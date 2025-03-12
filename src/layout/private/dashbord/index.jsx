@@ -1,93 +1,96 @@
 // Chakra imports
-import {  Box,  } from '@chakra-ui/react';
-import { useLocation } from 'react-router-dom';
+import { Box } from '@chakra-ui/react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../../components/admin/Navbar';
+import SidebarComponent from '../../../components/admin/Sidebar/sidebar';
 import userAtom from '../../../context/atoms/userAtom';
 import { useRecoilValue } from 'recoil';
-
-import { useNavigate } from "react-router-dom";
-import { storeAtom} from '../../../context/atoms/storeAtom'
+import { storeAtom } from '../../../context/atoms/storeAtom';
 import { cva } from 'class-variance-authority';
-import SidebarComponent from '../../../components/admin/Sidebar/sidebar';
 import { cn } from '../../../lib/utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { listProducts } from '../../../api/store/products';
 
- 
-const buttonVariants = cva(
-	"",
-	{
-	  variants: {
+const buttonVariants = cva("", {
+	variants: {
 		variant: {
-		  default: "p-4 md:ml-64 mt-[62px]",
-		  product: ""
+			default: "p-4 md:ml-64 mt-[62px]",
+			product: ""
 		},
 		size: {
-		  default: "h-10 px-4 py-2",
-		  sm: "h-9 rounded-md px-3",
-		  lg: "h-11 rounded-md px-8",
-		  icon: "h-10 w-10",
+			default: "h-10 px-4 py-2",
+			sm: "h-9 rounded-md px-3",
+			lg: "h-11 rounded-md px-8",
+			icon: "h-10 w-10",
 		},
-	  },
-	  defaultVariants: {
+	},
+	defaultVariants: {
 		variant: "default",
 		size: "default",
-	  },
-	}
-  )
-  
-// Custom Chakra theme
-export default function DashboardLayout({children , classNames}) {
+	},
+});
+
+export default function DashboardLayout({ children, classNames, isSmall = false }) {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const location = useLocation();
+	const store = useRecoilValue(storeAtom);
+	const { user, isAuthenticated } = useSelector((state) => state.user);
+
 	const [lastRouteElement, setLastRouteElement] = useState('');
-	const [expanded, setExpanded] = useState(false)
-	const user = useRecoilValue(userAtom)
-	
-	const store = useRecoilValue(storeAtom)
+	const [expanded, setExpanded] = useState(false);
+
 	useEffect(() => {
-		const token = localStorage.getItem("user-threads");
-		const accounts = JSON.parse(localStorage.getItem("accounts"));
-		
-		if (token && user && store) {
-		  console.log('welcome back')
-		} else if (!user && accounts) {
-			localStorage.removeItem('store')
-		  navigate("/choose-account");
-		  
-		} else if( !store && user) {
-			navigate(`/store-list`);
+		dispatch(listProducts(store));
+	}, [store, dispatch]);
+
+	useEffect(() => {
+		try {
+			const accounts = JSON.parse(localStorage.getItem("accounts"));
+
+			if (isAuthenticated && store) {
+				console.log('Welcome back');
+			} else if (!isAuthenticated && accounts) {
+				localStorage.removeItem('store');
+				navigate("/choose-account");
+			} else if (!store && isAuthenticated) {
+				navigate(`/store-list`);
+			}
+		} catch (error) {
+			console.error("Error parsing accounts from localStorage:", error);
 		}
-	  }, [navigate, store ,  user]);
+	}, [navigate, store, isAuthenticated]);
+
 	useEffect(() => {
 		const pathElements = location.pathname.split('/');
-		const lastElement = pathElements[pathElements.length - 1];
-		setLastRouteElement(lastElement);
-	  }, [location]);
-	
+		setLastRouteElement(pathElements[pathElements.length - 1]);
+	}, [location]);
+
 	document.documentElement.dir = 'ltr';
-	document.documentElement.dir = 'ltr';
-	const openSideBar = () =>{
-	   setExpanded(!expanded)
-	}
+
+	const toggleSidebar = () => {
+		setExpanded((prev) => !prev);
+	};
+
 	useEffect(() => {
-		// Set background color when the componenwt mounts
-		document.body.style.backgroundColor = '#f1f1f1'; // or any color you want
-		document.body.style.height = '100vh'
-		// Cleanup function to reset background when the component unmounts
+		document.body.style.backgroundColor = '#f1f1f1';
+		document.body.style.height = isSmall ? '100vh' : '';
+
 		return () => {
-			document.body.style.height = ''
-		  document.body.style.backgroundColor = ''; // Reset to default or another color
+			document.body.style.backgroundColor = '';
+			document.body.style.height = '';
 		};
-	  }, []);
+	}, [isSmall]);
+
 	return (
-	
-		<Box >
-		<Navbar click={openSideBar}  backgroundColor={'#fff'}/>
-		<SidebarComponent open={''} />
-		<div className={cn("p-4 py-10 md:ml-64 mt-[62px] " , classNames)} >
-            {children}
-            </div>
+		<Box>
+			<Navbar click={toggleSidebar} backgroundColor={'#fff'} />
+			<SidebarComponent open={expanded} />
+			<div className={cn("p-4 py-10 md:ml-64 mt-[62px]", classNames)}>
+				{children}
+			</div>
 		</Box>
 	);
 }

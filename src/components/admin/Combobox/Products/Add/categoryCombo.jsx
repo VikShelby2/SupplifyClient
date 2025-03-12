@@ -6,12 +6,14 @@ import userAtom from '../../../../../context/atoms/userAtom'
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 import { handleAddTag } from '../../../../../api/store/products'
 import { Label } from '@headlessui/react'
+import { useSelect } from '@nextui-org/react';
+import { useSelector } from 'react-redux';
 
 export default function CategoryCombobox({ option, placeholder, selected, setSelected , tags , setTags , styles  , Wrapper , noLabel   }) {
   const [query, setQuery] = useState('')
   const [hoveredPerson, setHoveredPerson] = useState(null)
   
- const user = useRecoilValue(userAtom)
+ const {user} = useSelector((state)=>state.user)
  const userId = user._id
 console.log(option)
  console.log(user)

@@ -3,7 +3,6 @@ import React , { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { Label } from "../../public/Home/components/label";
 import { cn } from "../../../lib/utils";
-import toast from "react-hot-toast";
 import { Input } from "../../public/Home/components/input";
 import { storeAtom } from "../../../context/atoms/storeAtom";
 import zxcvbn from 'zxcvbn';
@@ -13,22 +12,18 @@ import {
     IconBrandGoogle,
     IconBrandOnlyfans,
   } from "@tabler/icons-react";
-import userAtom from "../../../context/atoms/userAtom";
-import isLogged from "../../../context/atoms/loggedAtom";
-import loadingAtom from "../../../context/atoms/loadingAtom";
+
 import WhiteLogo from "../../../assets/public/home/home-logo-purple.svg";
 import AuthLayout from "../../../layout/auth";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 export default function SignUp(){
  
-    const user = useRecoilValue(userAtom)
- 
-    const setUser = useSetRecoilState(userAtom);
+    const {user  , isAuthinticated} = useSelector((state)=>state.user)
     const setStore  = useSetRecoilState(storeAtom)
-    const setLoggedIn = useSetRecoilState(isLogged)
-    const setLoading = useSetRecoilState(loadingAtom);
+    
     const navigate = useNavigate()
- 
+    const dispatch = useDispatch()
  
     const store = useRecoilValue(storeAtom);
     const [input , setInput] = useState({
@@ -42,14 +37,6 @@ export default function SignUp(){
     }
     ) 
    
-        useEffect(() => {
-      const token = localStorage.getItem("user-threads");
-      const accounts = JSON.parse(localStorage.getItem("accounts"));
-      
-      if (token) {
-       navigate(`/store-panel/${store._id}/home`);
-      } 
-    }, [user]);
     const [passwordScore, setPasswordScore] = useState(0);
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -128,14 +115,9 @@ export default function SignUp(){
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
           type="submit"
           onClick={()=>{
-            toast.promise(
-              HandleSignUp(input , navigate   ,setUser , setStore ,  setLoggedIn ,setLoading ) ,
-               {
-                 loading: 'Saving...',
-                 success: <b>Settings saved!</b>,
-                 error: <b>Could not save.</b>,
-               }
-             );
+            
+              HandleSignUp(input , navigate   ,dispatch , setStore  ) 
+           
            }}
         >
           Sign up &rarr;

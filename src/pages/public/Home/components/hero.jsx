@@ -372,14 +372,7 @@ const Icons = {
   
   
 const Hero = () => {
-    const containerRef = useRef(null);
-    const div1Ref = useRef(null);
-    const div2Ref = useRef(null);
-    const div3Ref = useRef(null);
-    const div4Ref = useRef(null);
-    const div5Ref = useRef(null);
-    const div6Ref = useRef(null);
-    const div7Ref = useRef(null);
+  
   return (
     <div className='flex items-center justify-center mb-100  '>
     <div className="h-auto md:mb-[300px] max-w-[1500px] px-5 lg:px-10 mt-20 relative overflow-hidden">
@@ -404,129 +397,9 @@ const Hero = () => {
            <p className="lg:w-[70%] text-center lg:text-2xl mt-2  text-neutral-700">
            Transform your e-commerce experience with Supplify. Build, manage, and scale your online store effortlessly—unlock your business's true potential today!
            </p>
-         
-           <div className="flex max-md:flex-col w-full items-center justify-center gap-5 py-5">
-           <button className="group p-[4px] rounded-[12px] bg-gradient-to-b from-white to-stone-200/40 shadow-[0_1px_3px_rgba(0,0,0,0.5)] active:shadow-[0_0px_1px_rgba(0,0,0,0.5)] active:scale-[0.995]">
-       <div className="bg-gradient-to-b from-stone-200/40 to-white/80 rounded-[8px] px-[1rem] py-2">
-         <div className="flex gap-2 items-center">
-           <span className="font-semibold">Get Started</span>
-         </div>
-       </div>
-     </button>
-           </div>
-         </div>
-         <div className="absolute w-[90%] top-[20%] h-[300px] z-[-101]">
-           <svg xmlns="http://www.w3.org/2000/svg" id="patternId" width="100%" height="100%">
-             <defs>
-               <pattern id="a" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="scale(3) rotate(0)">
-                 <rect x="0" y="0" width="100%" height="100%" fill="hsla(0, 0%, 100%, 0)"></rect>
-                 <path d="M 10,-2.55e-7 V 20 Z M -1.1677362e-8,10 H 20 Z" strokeWidth="0.5" className="stroke-[#0000007a] " fill="none"></path>
-               </pattern>
-             </defs>
-             <rect width="800%" height="800%" transform="translate(0,0)" fill="url(#a)"></rect>
-           </svg>
-           <div className="bg-gradient-to-b from-white  from-20% to-transparent absolute inset-0"></div>
-           <div className="bg-gradient-to-l from-white  from-1% to-transparent to-30% absolute inset-0"></div>
-           <div className="bg-gradient-to-r from-white  from-1% to-transparent to-30% absolute inset-0"></div>
-           <div className="bg-gradient-to-t from-white  from-1% to-transparent to-30% absolute inset-0"></div>
-         </div>
-         <div className=" w-[100%]  absolute top-[200px] h-[100vh] z-[-99]"> 
-         <ScrollParallax isAbsolutelyPositioned1 >
-         <div className="flex flex-col hidden xl:flex  max-w-[450px] border-gray-200 rounded-xl p-4 md:p-5">
-       <img src={AnsImg} className='w-full h-full'  />
- </div>
-           
-                 </ScrollParallax></div>
-                
-        
-       </div>
-     </div>
-   <div className='hidden absolute xl:flex w-[500px] top-[650px]  left-[170px] 2xl:left-[270px] 3xl:left-[500px]   h-[100vh] z-[-100]'>
-         <ScrollParallax isAbsolutelyPositioned >    
-         <div className="relative flex w-[500px] h-[270px] max-w-lg items-center justify-center overflow-hidden rounded-lg border bg-background  md:shadow-xl">
-      
-      <div className='absolute '>
-      <VelocityScroll
-      text="Worldwide B2B connections . International marketing "
-      default_velocity={5}
-      className="font-display text-center  font-bold tracking-[-0.02em] text-black drop-shadow-sm text-[4.25rem] md:leading-[5rem]"
-    />
       </div>
-      <GridGlobe />
-   
-    </div>
-       </ScrollParallax>
-         </div>
-         <div className='hidden absolute xl:flex w-[500px] top-[650px] 2xl:top-[665px]  left-[820px] xl:left-[820px] 2xl:left-[930px] 3xl:left-[1170px]   h-[100vh] z-[-100]'>
-         <ScrollParallax isAbsolutelyPositioned >     
-         <div 
-      className="relative grid w-full max-w-[500px] items-center overflow-hidden rounded-lg border bg-background p-10 md:shadow-xl"
-
-      ref={containerRef}
-    >
-    <div className='mb-5'>
-    <h1 className=" !leading-[0.85em] items-center flex overflow-hidden  from-white from-50% to-[#9c9c9c] bg-text bg-clip-text text-transparent text-center text-5xl  w-full font-bold pb-1 relative" style={{ transform: 'translateY(0%) translateZ(0px)' }}>
-          Connect with Suppliers
-             </h1>
-    </div>
-      <div className="flex size-full flex-col max-w-lg max-h-[200px] items-stretch justify-between gap-10">
-        
-        <div className="flex flex-row items-center justify-between">
-          <Circle ref={div2Ref}>
-            <Icons.person />
-          </Circle> 
-          <Circle ref={div4Ref} className="size-16">
-            <Icons.supplify />
-          </Circle>
-          <Circle ref={div6Ref}>
-            <Icons.zapier />
-          </Circle>
-        </div>
-        
       </div>
- 
-    
-     
-      <AnimatedBeam
-        containerRef={containerRef}
-        fromRef={div2Ref}
-        toRef={div4Ref}
-        startYOffset={10}
-        endYOffset={10}
-        curvature={-20}
-      />
-          <AnimatedBeam
-        containerRef={containerRef}
-        fromRef={div4Ref}
-        toRef={div2Ref}
-        startYOffset={-10}
-        endYOffset={-10}
-        curvature={20}
-        reverse
-      />
-     
-     <AnimatedBeam
-        containerRef={containerRef}
-        fromRef={div6Ref}
-        toRef={div4Ref}
-        startYOffset={10}
-        endYOffset={10}
-        curvature={-20}
-      />
-          <AnimatedBeam
-        containerRef={containerRef}
-        fromRef={div4Ref}
-        toRef={div6Ref}
-        startYOffset={-10}
-        endYOffset={-10}
-        curvature={20}
-        reverse
-      />
-     
-      
-    </div>
-       </ScrollParallax>
-         </div>
+      </div>
     </div>
   )
 }

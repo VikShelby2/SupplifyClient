@@ -13,7 +13,6 @@ import { Link } from 'react-router-dom';
 
 export default function CollectionCombobox({ placeholder  ,   selectedOptions , setSelectedOptions}) {
   const [options, setOptions] = useState([]);
-  const user = useRecoilValue(userAtom);
   const [query, setQuery] = useState('');
  const store = useRecoilValue(storeAtom)
 

@@ -8,9 +8,11 @@ import ListStore from "./components/list";
 import { Link, useNavigate } from "react-router-dom";
 import { storeAtom } from "../../../context/atoms/storeAtom";
 import { encryptData } from "../../../lib/crypto";
+import { useSelect } from "@react-three/drei";
+import { useSelector } from "react-redux";
 
 export default function UserStore() {
-  const user = useRecoilValue(userAtom);
+  const {user} = useSelector((state)=>state.user)
   const navigate = useNavigate();
   const setStore = useSetRecoilState(storeAtom);
   const [stores, setStores] = useState([]);
@@ -21,7 +23,7 @@ export default function UserStore() {
     setStore(store);
     localStorage.removeItem('store'); // Remove the existing store object
     localStorage.setItem("store", encryptData(store));
-    navigate(`/store-panel/${store._id}/home`); // Navigate to the store's home panel
+    navigate(`/store-panel/home`); // Navigate to the store's home panel
   };
 
   useEffect(() => {

@@ -1,23 +1,23 @@
 import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions, Transition } from '@headlessui/react';
-import clsx from 'clsx';
+
 import { Checkbox } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import userAtom from '../../../../../context/atoms/userAtom';
+
 import { Label } from '../../../../../pages/public/Home/components/label';
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 import { handleAddTag, handleListTags } from '../../../../../api/store/products';
-import loadingAtom from '../../../../../context/atoms/loadingAtom';
+
+import { useSelector } from 'react-redux';
 export default function TagsCombobox({ placeholder, autoStyle, selectedOptions, setSelectedOptions, styles, noLabel  , isDropdownOpen , setIsDropdownOpen , AddTagOpt = false}) {
   const [options, setOptions] = useState([]);
-  const user = useRecoilValue(userAtom);
-  const setLoading = useSetRecoilState(loadingAtom);
+  const {user} = useSelector((state)=>state.user)
+
   const [query, setQuery] = useState('');
   const effectiveAdd = AddTagOpt !== false;
 
   useEffect(() => {
     if (user?._id) {
-      handleListTags(user._id, setOptions, setLoading);
+      handleListTags(user._id, setOptions);
     }
   }, [user]);
 

@@ -28,7 +28,7 @@ export default function Navbar({ openMobile  , backgroundColor , }) {
   };
   const dataUri = svgToDataUri(store.svgData);
   return (
-    <div className="fixed  top-0 min-w-[100vw] min-w-[100vw] z-2000 ">
+    <div className="fixed bg-[#f1f1f1] top-0 min-w-[100vw] min-w-[100vw] z-2000 ">
       <nav className=" mt-[10px] rounded-[.75rem] mr-4 ml-1 md:ml-64 z-2000" style={{ background:  backgroundColor ? backgroundColor :  'fff', fontFamily: 'sora ,ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"' }}>
         <div className="px-2 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">

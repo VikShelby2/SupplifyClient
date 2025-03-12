@@ -16,6 +16,7 @@ import P2card from "../pages/private/store/home/components/p2card";
 import DashHome from "../pages/private/store/home";
 import CollectionPage from "../pages/private/store/product/collections";
 import Theme from "../pages/private/store/builder";
+import ProtectRoute from "../components/admin/Private/auth";
 
 export const RootRoute = () =>{
     const routes = [
@@ -27,35 +28,39 @@ export const RootRoute = () =>{
     return routes  
   }
   
-  export const AuthRoute = () => {
-    const user = useRecoilValue(userAtom);
+  export const AuthRoute = ({useSelector}) => {
     const store = useRecoilValue(storeAtom)
-    const token = localStorage.getItem('user-threads')
+    
+ const { user, isAuthenticated } = useSelector((state) => state.user);
+
      const authRoute = [
-         {path: '/signUp'  , element: store && token === null ?  <SignUp/> : <Navigate  to={'/create-store'}/> },
-         {path: '/signIn' , element: <SignIn/> },
-         {path: '/create-store' , element: <CreateStore/>},
-         {path:'/choose-account' , element: <UserSelect />} ,
-         {path: '/store-list'  ,   element: user ? <Navigate to={`/store-list/${user?._id}`} />  : <Navigate to="/signin" /> } ,
-         {path: `/store-list/:userId`, element: user ? <UserStore /> : <Navigate to="/signIn" />  } ,
+         {path: '/signUp'  , element:  <ProtectRoute protectSignUp={true}><SignUp/></ProtectRoute> },
+         {path: '/signIn' , element: !isAuthenticated ?  <SignIn/> : <Navigate  to={`/store-list/`}/> },
+         {path: '/create-store' , element: <ProtectRoute><CreateStore/></ProtectRoute>},
+         {path:'/choose-account' , element: <ProtectRoute><UserSelect /></ProtectRoute>} ,
+         {path: '/store-list' , element: (
+          <ProtectRoute> 
+              <Navigate to={`/store-list/${isAuthenticated && user && user._id ? user._id : ''}`} />
+          </ProtectRoute>
+      )} ,
+      {path: `/store-list/:userId`, element: user ? <ProtectRoute><UserStore /></ProtectRoute> : <Navigate to="/signIn" />  } ,
      ]
     return authRoute
   }
   
   
   export const DashboardRoute = (loggedIn) =>{
-    const store = useRecoilValue(storeAtom);
-    const user = useRecoilValue(userAtom)
+    
   
    const routes = [
-     { path: '/store-panel/' , element: <Navigate to={`/store-panel/${store?._id}/home`}/>},
-     { path: `/store-panel/:storeId/home`, element: user  ? <DashboardLayout classNames={'mt-[60px] '}><DashHome/></DashboardLayout>: <Navigate to={'/signIn'}/>},
-     { path: `/store-panel/:storeId/theme`, element: user  ? <DashboardLayout classNames={'mt-[40px]'}><Theme/></DashboardLayout>: <Navigate to={'/signIn'}/>},
-     { path: `/store-panel/${store ?  store._id : ''}/products`, element: user  ? <DashboardLayout><ProductPage/></DashboardLayout>: <Navigate to={'/signIn'}/>},
-     { path: `/store-panel/${store ?  store._id : ''}/products/inventory`, element: user  ? <DashboardLayout><InventoryPage/></DashboardLayout>: <Navigate to={'/signIn'}/>},
-     { path: `/store-panel/${store ?  store._id : ''}/products/add`, element: user  ? <DashboardLayout><AddProduct/></DashboardLayout>: <Navigate to={'/signIn'}/>} ,
-     { path: `/store-panel/${store ?  store._id : ''}/products/edit`, element: user  ? <DashboardLayout><AddProduct/></DashboardLayout>: <Navigate to={'/signIn'}/>} ,
-     { path: `/store-panel/${store ?  store._id : ''}/collections`, element: user  ? <DashboardLayout><CollectionPage/></DashboardLayout>: <Navigate to={'/signIn'}/>},  
+     { path: '/store-panel/' , element: <Navigate to={`/store-panel/home`}/>},
+     { path: `/store-panel/home`, element: <ProtectRoute dashboard={true}><DashboardLayout isSmall={true} classNames={'mt-[60px] '}><DashHome/></DashboardLayout></ProtectRoute> },
+     { path: `/store-panel/theme`, element: <ProtectRoute dashboard={true}><DashboardLayout classNames={'mt-[40px]'}><Theme/></DashboardLayout>:</ProtectRoute>  },
+     { path: `/store-panel/products`, element: <ProtectRoute dashboard={true}><DashboardLayout><ProductPage/></DashboardLayout></ProtectRoute> },
+     { path: `/store-panel/products/inventory`, element: <ProtectRoute dashboard={true}><DashboardLayout><InventoryPage/></DashboardLayout></ProtectRoute> },
+     { path: `/store-panel/products/add`, element: <ProtectRoute dashboard={true}><DashboardLayout><AddProduct/></DashboardLayout></ProtectRoute> } ,
+     { path: `/store-panel/products/edit`, element: <ProtectRoute dashboard={true}><DashboardLayout><AddProduct/></DashboardLayout></ProtectRoute> } ,
+     { path: `/store-panel/collections`, element: <ProtectRoute dashboard={true}><DashboardLayout><CollectionPage/></DashboardLayout></ProtectRoute> },  
    ]
   return routes;
 }

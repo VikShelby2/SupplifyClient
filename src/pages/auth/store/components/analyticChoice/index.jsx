@@ -128,10 +128,10 @@ const questions = [
 const SellPosition = ({click}) => {
   return (
     <div className="w-full  relative  items-start grid rounded-2xl  h-[320px] w-[650px] 2xl:w-[750px] text-xl md:text-4xl font-bold  text-white bg-gradient-to-br px-5 pt-4  bg-white shadow-input">
-    <div className="grid gap-0 w-full text-[#303030]">
-        <h1 className="text-[1.4rem] leading-tight">Where would you like to sell ?</h1>
-        <p style={{fontWeight:'500'}} className="text-[.9rem]  text-gray-400 leading-tight">Choose as many as you want </p>
-    </div>
+      <div className="grid gap-0 w-full text-[#303030]">
+          <h1 className="text-[1.4rem] leading-tight">Where would you like to sell ?</h1>
+          <p style={{fontWeight:'500'}} className="text-[.9rem]  text-gray-400 leading-tight">Choose as many as you want </p>
+      </div>
     <div className='w-full flex items-center'>
       <Cards items={questions} />
     </div>

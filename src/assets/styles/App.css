@@ -28,7 +28,7 @@
 }
 @font-face {
   font-family: 'MyCustomFont';
-  src: url('./assets/fonts/GeistMonoVF.woff') format('woff'); /* Adjust the path */
+  src: url('../fonts/GeistMonoVF.woff') format('woff'); /* Adjust the path */
   font-weight: normal;
   font-style: normal;
 }
@@ -36,10 +36,9 @@
   --tw-shadow-color: hsl(0, 0%, 80.8%) ;
 }
 html, body {
-  height: 100% !important;
   margin: 0;
   padding: 0;
-  overflow: scroll; /* Prevent scrolling of body */
+ 
 }
 body{
  margin: 0;

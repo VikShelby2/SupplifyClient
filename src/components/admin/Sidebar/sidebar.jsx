@@ -110,7 +110,7 @@ export default function SidebarComponent({isActive , open}) {
     navMain: [
       {
         title: "Home",
-        url: `/store-panel/${store._id}/home`,
+        url: `/store-panel/home`,
         icon: House,
         isActive:isActive || false,
       },
@@ -127,15 +127,15 @@ export default function SidebarComponent({isActive , open}) {
       },
       {
         title: "Products",
-        url: `/store-panel/${store._id}/products`,
-        addUrl: `/store-panel/${store._id}/products/add`,
-        invUrl: `/store-panel/${store._id}/products/inventory` ,
+        url: `/store-panel/products`,
+        addUrl: `/store-panel/products/add`,
+        invUrl: `/store-panel/products/inventory` ,
         icon: ProductIcon,
         isCollapsible: true,
         isActive:isActive ||  false,
         items: [
-          { title: "Inventory", url: `/store-panel/${store._id}/products/inventory` , isActive: false },
-          { title: "Collection", url: `/store-panel/${store._id}/collections` , isActive: false  },
+          { title: "Inventory", url: `/store-panel/products/inventory` , isActive: false },
+          { title: "Collection", url: `/store-panel/collections` , isActive: false  },
           { title: "Track orders", url: "#" },
           { title: "Gift card", url: "#" },
         ],
@@ -157,7 +157,7 @@ export default function SidebarComponent({isActive , open}) {
       { title: "File", url: "#", icon: FileIcon, isActive: false },
     ],
     projects: [
-      { name: "Online Store",  url: `/store-panel/${store._id}/theme`, icon: Store },
+      { name: "Online Store",  url: `/store-panel/theme`, icon: Store },
       { name: "POS", url: "#", icon: PieChart },
       { name: "Teams", url: "#", icon: Map },
     ],

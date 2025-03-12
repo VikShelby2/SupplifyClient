@@ -1,5 +1,4 @@
 
-import {toast}  from  'react-hot-toast'
 import { setLoading, setError, addProduct, setProducts, editProductMeth } from '../../../context/redux/productsSlice';
 import { setTabs } from '../../../context/redux/tabsSlice';
 
@@ -138,7 +137,7 @@ export const handleAddTag = async (userId, query, tags, setOptions) => {
       console.error('Error:', error);
     }
   };
-  export const handleListTags = async (userId , setTags  , setLoading)=>{
+  export const handleListTags = async (userId , setTags  )=>{
 
     try {
             const res  = await fetch('http://localhost:8080/api/product/tags/list', {
@@ -215,18 +214,18 @@ export const handleAddCollection = async(storeId, query, tags, setOptions) =>{
         const addedTabs = await response.json();
         if(addedTabs){
         dispatch(setTabs(addedTabs))
-        toast.success('Tab added successfully')
+       
         setOpen(false)
         console.log(addedTabs.tabs)
         } else {
-          toast.error('Couldent update tabs pleas reload the page')
+          
         }
 
       } else {
-        toast.error('Failed to add tag');
+   
       }
     } catch (error) {
-      toast.error('Failed to add tag');
+     
       console.log(error)
     }
   }
@@ -242,7 +241,7 @@ export const handleEditTab = async( tabId , newName) =>{
   
     
    } catch (error) {
-    toast.error('Failed to add tag');
+   
     console.log(error)
    }
 }
@@ -263,14 +262,12 @@ export const handleListTabs =  (storeId  , type , resolve , reject) => async (di
       console.log(`Tab listed successfully ${addedTabs}`)
       console.log(addedTabs)
       } else {
-        toast.error('Couldent list tabs pleas reload the page')
+      
       }
 
-    } else {
-      toast.error('Failed to list tab');
-    }
+    } 
    } catch (error) {
-    toast.error('Failed to list tabs');
+ 
     console.log(error)
     reject(error);
    }

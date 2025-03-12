@@ -8,18 +8,17 @@ import logo from '../../../assets/public/home/home-logo-purple.svg';
 import { Link, useNavigate } from "react-router-dom";
 import userAtom from "../../../context/atoms/userAtom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import loadingAtom from "../../../context/atoms/loadingAtom";
-import isLogged from "../../../context/atoms/loggedAtom";
+
 import { cn } from "../../../lib/utils";
 import { Label } from "../../public/Home/components/label";
 import { Input } from "../../public/Home/components/input";
 import { storeAtom } from "../../../context/atoms/storeAtom";
 import AuthLayout from "../../../layout/auth";
+import { HandleLogIn } from "../../../api/auth";
+import { useDispatch } from "react-redux";
 
 function SignIn() {
   const ENCRYPTION_KEY = "your-secure-encryption-key"; // Replace with a secure key
-  const setLoggedIn = useSetRecoilState(isLogged);
-  const setLoading = useSetRecoilState(loadingAtom);
   const [editEmail, setEditEmail] = useState(false);
   const navigate = useNavigate();
   const user = useRecoilValue(userAtom);
@@ -40,44 +39,9 @@ function SignIn() {
    
   }, [navigate]);
 
+  const dispatch = useDispatch(); // Access the dispatch function
   const handleLogin = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch("http://localhost:8080/api/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: 'include',
-        body: JSON.stringify(input),
-      });
-      const data = await res.json();
-      console.log(data)
-      if (data.error) {
-        console.error("Error", data.error, "error");
-        return;
-      }
-      setLoggedIn(true);
-
-      // Encrypt and save user data
-      const encryptedUser = CryptoJS.AES.encrypt(JSON.stringify(data), ENCRYPTION_KEY).toString();
-
-      // Update local storage
-      let accounts = JSON.parse(localStorage.getItem("accounts")) || [];
-      const userExists = accounts.some(account => account.user && account.user._id === data._id);
-      if (!userExists) {
-        accounts.push({ user: encryptedUser });
-        localStorage.setItem("accounts", JSON.stringify(accounts));
-      }
-
-      localStorage.setItem("user-threads", encryptedUser);
-      setUser(data);
-      navigate(`/store-list`);
-    } catch (error) {
-      console.log("Error", error, "error");
-    } finally {
-      setLoading(false);
-    }
+    await HandleLogIn(input , navigate  , dispatch )
   };
 
   const handleSubmit = (e) => {
@@ -87,8 +51,8 @@ function SignIn() {
 
   return (
     <AuthLayout>
-      <div className="center">
-        <h1 className="text-3xl tracking-[-0.10em] text-black font-bold">Supplify</h1>
+      <div className="center gap-2">
+        <h1 className="text-3xl tracking-[-0.10em] text-black dark:text-white font-bold">Supplify</h1>
         <img className="size-7 flex items-center justify-center" src={logo} />
       </div>
 
