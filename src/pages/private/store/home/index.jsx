@@ -1,10 +1,7 @@
 import React from 'react'
 import P2card from './components/p2card'
-import { useRecoilValue } from 'recoil'
-import userAtom from '../../../../context/atoms/userAtom'
 
 const DashHome = () => {
-  const user = useRecoilValue(userAtom)
   return (
 <div className="w-full h-fit gap-3 grid  justify-center  p-6">
   {/* First Row */}

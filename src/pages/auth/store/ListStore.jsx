@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Center } from '@chakra-ui/react';
 import logo from '../../../assets/public/home/home-logo-purple.svg';
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import userAtom from "../../../context/atoms/userAtom";
 import AuthLayout from "../../../layout/auth";
 import ListStore from "./components/list";
 import { Link, useNavigate } from "react-router-dom";

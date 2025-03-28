@@ -148,8 +148,9 @@ export const HandleLogIn = async (
   }
 };
 
-export const authUser = () => async (dispatch) => {
+export const authUser = (setStore) => async (dispatch) => {
   dispatch(startLoading())
+  
   try {
       const response = await fetch('http://localhost:8080/api/protected', {
           method: 'GET',
@@ -163,10 +164,12 @@ export const authUser = () => async (dispatch) => {
       
           dispatch(loginSuccess(data.user));
       } else {
+                setStore(null)
                 dispatch(loginFailure('Login failed: Incomplete data.'));
       }
   } catch (error) {
       console.log(error);
+      setStore(null)
       dispatch(loginFailure('Login failed. Please try again.'));
   } finally {
       dispatch(stopLoading())

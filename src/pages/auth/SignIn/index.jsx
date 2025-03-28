@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   IconBrandGithub,
   IconBrandGoogle,
@@ -6,7 +6,6 @@ import {
 import CryptoJS from "crypto-js";
 import logo from '../../../assets/public/home/home-logo-purple.svg';
 import { Link, useNavigate } from "react-router-dom";
-import userAtom from "../../../context/atoms/userAtom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import { cn } from "../../../lib/utils";
@@ -15,15 +14,15 @@ import { Input } from "../../public/Home/components/input";
 import { storeAtom } from "../../../context/atoms/storeAtom";
 import AuthLayout from "../../../layout/auth";
 import { HandleLogIn } from "../../../api/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 
 function SignIn() {
   const ENCRYPTION_KEY = "your-secure-encryption-key"; // Replace with a secure key
   const [editEmail, setEditEmail] = useState(false);
   const navigate = useNavigate();
-  const user = useRecoilValue(userAtom);
+  const {user} = useSelector((state)=> state.user)
   const store = useRecoilValue(storeAtom);
-  const setUser = useSetRecoilState(userAtom);
   const [input, setInput] = useState({
     email: user ? user.email : '',
     password: ''
@@ -48,7 +47,14 @@ function SignIn() {
     e.preventDefault();
     console.log("Form submitted");
   };
+ 
+  
 
+
+  
+  const handleGoogleLogin = () => {
+    window.location.href = "http://localhost:8080/api/users/google"; // Backend Google route
+  };
   return (
     <AuthLayout>
       <div className="center gap-2">
@@ -105,16 +111,20 @@ function SignIn() {
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
         <div className="flex flex-col space-y-4">
-          <button className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
-            <IconBrandGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-neutral-700 dark:text-neutral-300 text-sm">GitHub</span>
-            <BottomGradient />
-          </button>
-          <button className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
+          <a href='http://localhost:8080/api/users/google'>
+           <button onClick={handleGoogleLogin}  className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
             <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
             <span className="text-neutral-700 dark:text-neutral-300 text-sm">Google</span>
             <BottomGradient />
           </button>
+          </a>
+        
+          <button   className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]">
+            <IconBrandGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
+            <span className="text-neutral-700 dark:text-neutral-300 text-sm">GitHub</span>
+            <BottomGradient />
+          </button>
+        
         </div>
       </form>
     </AuthLayout>

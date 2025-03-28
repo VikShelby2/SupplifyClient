@@ -128,7 +128,7 @@ useEffect(()=>{
       </div>
       <main className={`w-full flex  ${openSearch ? 'flex-row gap-3' : ''} flex-row gap-3`}>
     
-     { !loading && noProducts && !noOption && (  
+     { !loading && products.length <= 0  && (  
      <NoProductView />)}
      { !loading && products.length > 0 &&(
      
@@ -249,7 +249,7 @@ useEffect(()=>{
          <h1>No products found</h1>
          <span className='hover-underline-animation-primary'>Check out other products</span>
      </div>
-    ) : (  <div className=' items-center  shadow-input h-full  rounded-xl bg-white rounded-xl relative justify-center overflow-x-auto w-full  '>
+    ) : (  <div className=' items-center h-full   relative justify-center overflow-x-auto w-full  '>
       <Table selectedProjects={selectedProjects} isSelected={isSelected} setIsSelected={setSelected} setSelectedProjects={setSelectedProjects} filteredProducts={products} />
     </div>         )}
      
@@ -361,6 +361,3 @@ useEffect(()=>{
 }
 
 export default ProductPage
-
-
-

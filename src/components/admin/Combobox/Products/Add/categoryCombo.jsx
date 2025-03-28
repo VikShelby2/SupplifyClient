@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions, Transition } from '@headlessui/react'
 import { Minus  , MoveRight } from 'lucide-react';
 import { useRecoilValue } from 'recoil'
-import userAtom from '../../../../../context/atoms/userAtom'
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 import { handleAddTag } from '../../../../../api/store/products'
 import { Label } from '@headlessui/react'

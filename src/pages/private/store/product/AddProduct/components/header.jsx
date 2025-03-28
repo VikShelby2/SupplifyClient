@@ -10,7 +10,7 @@ const Header = ({  productSaved , handelEditProduct, handleSubmit, titleFilled  
   return (
     <div className="grid grid-cols-1 w-full items-center gap-4">
       <div className="items-center gap-4 justify-start w-full flex">
-      <Link to={`/store-panel/${store._id}/products`}>
+      <Link to={`/store-panel/products`}>
 
         <Button 
           isIconOnly  

@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../../components/admin/Navbar';
 import SidebarComponent from '../../../components/admin/Sidebar/sidebar';
-import userAtom from '../../../context/atoms/userAtom';
 import { useRecoilValue } from 'recoil';
 import { storeAtom } from '../../../context/atoms/storeAtom';
 import { cva } from 'class-variance-authority';

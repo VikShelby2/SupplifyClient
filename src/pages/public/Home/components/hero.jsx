@@ -1,15 +1,8 @@
 import React, { forwardRef, useRef } from 'react'
-import AnimatedShinyText from '../../../../components/ui/animated-shiny-text'
+import AnimatedShinyText from '../../../../components/ui/animations/animated-shiny-text'
 import { cn } from '../../../../lib/utils'
 import { ScrollParallax } from "react-just-parallax";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
-import AnsImg from '../../../../assets/public/home/ANS.png'
-import { Globe  } from '../../../../components/ui/globe.jsx';
-import GridGlobe from '../../../../components/ui/gridGlobe.jsx';
-import shirt from '../../../../assets/public/home/shirt.jpg'
-import { VelocityScroll } from '../../../../components/ui/scroll-v-text.jsx';
-import { AnimatedBeam } from '../../../../components/ui/animated-beam.jsx';
-import { WordFadeIn } from '../../../../components/ui/word-fade.jsx';
 const Circle = forwardRef(({ className, children }, ref) => {
   return (
     <div

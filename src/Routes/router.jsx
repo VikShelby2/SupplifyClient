@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import userAtom from "../context/atoms/userAtom";
+
 import Home from "../pages/public/Home";
 import SignUp from "../pages/auth/SignUp";
 import SignIn from "../pages/auth/SignIn";
@@ -36,7 +36,7 @@ export const RootRoute = () =>{
      const authRoute = [
          {path: '/signUp'  , element:  <ProtectRoute protectSignUp={true}><SignUp/></ProtectRoute> },
          {path: '/signIn' , element: !isAuthenticated ?  <SignIn/> : <Navigate  to={`/store-list/`}/> },
-         {path: '/create-store' , element: <ProtectRoute><CreateStore/></ProtectRoute>},
+         {path: '/create-store' , element: <CreateStore/>},
          {path:'/choose-account' , element: <ProtectRoute><UserSelect /></ProtectRoute>} ,
          {path: '/store-list' , element: (
           <ProtectRoute> 

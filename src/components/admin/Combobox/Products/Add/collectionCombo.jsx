@@ -4,7 +4,6 @@ import { Checkbox } from '@nextui-org/react';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import userAtom from '../../../../../context/atoms/userAtom';
 import { handleAddCollection, handleListCollections} from '../../../../../api/store/products';
 import { storeAtom } from '../../../../../context/atoms/storeAtom';
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";

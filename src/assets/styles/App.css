@@ -6,6 +6,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root {
+  --p1: #2A85FF;
+  --p2: #83BF6E;
+  --p3: #FF6A55;
+  --p4: #8E59FF;
+  
+  --s1: #FFBC99;
+  --s2: #CABDFF;
+  --s3: #B1E5FC;
+  --s4: #B5E4CA;
+  --s5: #FFD88D;
+
+  --blackFill: #000;
+  
+  --n: #FFFFFF;
+  --n1: #FCFCFC;
+  --n2: #F4F4F4;
+  --n3: #EFEFEF;
+  --n4: #6F767E;
+  --n5: #33383F;
+  --n6: #272B30;
+  --n7: #1A1D1F;
+  --n8: #111315;
+
+  --primary: #8b51fe;
+
+  --shades1: #9A9FA5;
+  --shades2: #6F767E;
+  --shades3: rgba(111, 118, 126, 0.4);
+  --shades4: rgba(17, 19, 21, 0.5);
+}
 
 :root {
   --chart-1: 12 76% 61%;
@@ -70,9 +101,60 @@ font-family:  sora, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "
   .custom-tr:not(:last-child) {
     box-shadow: rgba(141, 141, 141, 0.3) 0rem -0.0625rem 0rem 0rem inset
   } 
+  .top-div{
+    box-shadow: rgba(141, 141, 141, 0.3) 0rem 0.0625rem 0rem 0rem inset
+  
+  }
   .custom-tr-hd {
-    box-shadow: rgba(141, 141, 141, 0.3) 0rem -0.0625rem 0rem 0rem inset
+    border:
+    1px solid black;
+      border-radius:
+    .5rem;
+      box-shadow: rgb(244 244 244 / var(--tw-bg-opacity)) 0rem 0.0625rem 10rem 0rem inset;
+      background:
+    none;
+    border: 1px solid black;
   } 
+  .btn-shd{
+    --tw-shadow: 0 1px 1px rgba(0,0,0,0.3);
+  --tw-shadow-colored: 0 1px 1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+
+  }
+  .color-th{
+    color: rgb(99, 105, 117);
+  }
+  .add {
+   
+    width: 1.3rem;
+  height: 1.3rem;
+  align-items: center;
+  align-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 2px solid var(--n3);
+    font-size: 0;
+    transition: border-color 0.2s;
+}
+
+
+
+.add svg {
+    fill: var(--n4);
+    transition: fill 0.2s;
+}
+
+
+.add.active {
+    border-color: var(--shades1);
+}
+
+.add.active svg {
+    fill: var(--shades1);
+}
+
   .button-35 {
     align-items: center;
     background-color: #fff;

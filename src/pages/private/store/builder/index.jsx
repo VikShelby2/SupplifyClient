@@ -12,7 +12,7 @@ import Heading from './components/heading';
 import StyleHub from './components/styleHub';
 const Theme = () => {
   return (
-    <div className='w-full px-[200px]  h-full flex items-center flex-col gap-5'>
+    <div className='w-full px-[200px] mt-8 h-full flex items-center flex-col gap-5'>
           <Heading />
           <div className="w-full h-full flex items-center  ">
             <ThemePreview />

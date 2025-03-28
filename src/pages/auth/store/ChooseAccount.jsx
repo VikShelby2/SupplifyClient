@@ -5,13 +5,11 @@ import AuthLayout from "../../../layout/auth";
 import ListStore from "./components/list";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import userAtom from "../../../context/atoms/userAtom";
 import {Pencil1Icon} from '@radix-ui/react-icons'
 export default function UserSelect() {
   const navigate = useNavigate();
   const [accounts, setAccounts] = useState([]);
   const [edit , setEdit] = useState([])
-  const setUser = useSetRecoilState(userAtom)
   useEffect(() => {
     // Retrieve accounts from localStorage
     localStorage.removeItem('user-threads')
@@ -25,12 +23,12 @@ export default function UserSelect() {
       navigate('/signin');
     }
   }, [navigate]);
-
+  
   const handleAccountSelect = (account) => {
     // Example action on account select (you can adjust this as per your requirement)
     console.log("Selected Account:", account);
   
-    setUser({email: account.user.email})
+    //dispatch(setUser({email: account.user.email}))
     navigate('/signIn'); // Example navigation to '/store-list'
   };
   const handleDeleteAccount = (accountToDelete) => {

@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority';
 
 // Define the button outer and inner style variants
 const outerButtonStyles = cva(
-  'group p-[4px] rounded-[12px] shadow-[0_1px_3px_rgba(0,0,0,0.5)] active:shadow-[0_0px_1px_rgba(0,0,0,0.5)] active:scale-[0.995]',
+  'group p-[4px] btn-shd rounded-[.5rem] shadow-[0_1px_3px_rgba(0,0,0,0.5)] active:shadow-[0_0px_1px_rgba(0,0,0,0.5)] active:scale-[0.995]',
   {
     variants: {
       intent: {
@@ -20,7 +20,7 @@ const outerButtonStyles = cva(
 );
 
 const innerButtonStyles = cva(
-  'bg-gradient-to-b rounded-[8px] ',
+  'bg-gradient-to-b rounded-[.4rem] ',
   {
     variants: {
       intent: {
@@ -46,7 +46,7 @@ const Button = ({ children, intent = 'stone'  , size }) => {
     <button className={outerButtonStyles({ intent })}>
       <div className={innerButtonStyles({ intent , size })}>
         <div className="flex gap-2 items-center">
-          <span className="font-semibold">{children}</span>
+          <span className="">{children}</span>
         </div>
       </div>
     </button>

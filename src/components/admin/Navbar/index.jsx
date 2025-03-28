@@ -6,7 +6,7 @@ import { useRecoilValue } from "recoil";
 import { storeAtom} from '../../../context/atoms/storeAtom'
 import {Avatar} from "@nextui-org/react";
 import {Badge, Button} from "@nextui-org/react";
-import { AuroraText } from "../../ui/auratext";
+import { AuroraText } from "../../ui/animations/auratext";
 import { NotificationIcon, SearchIcon } from "../../ui/dashboard/icon";
 import { Bell } from "lucide-react";
 import { useSidebar } from "../../ui/shadcn/sidebar";
@@ -28,7 +28,7 @@ export default function Navbar({ openMobile  , backgroundColor , }) {
   };
   const dataUri = svgToDataUri(store.svgData);
   return (
-    <div className="fixed bg-[#f1f1f1] top-0 min-w-[100vw] min-w-[100vw] z-2000 ">
+    <div className="fixed bg-transparent top-0 min-w-[100vw] min-w-[100vw] z-[100] ">
       <nav className=" mt-[10px] rounded-[.75rem] mr-4 ml-1 md:ml-64 z-2000" style={{ background:  backgroundColor ? backgroundColor :  'fff', fontFamily: 'sora ,ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"' }}>
         <div className="px-2 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">

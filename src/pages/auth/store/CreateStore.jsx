@@ -5,6 +5,8 @@ import { HoverEffectContainer } from "../../../components/ui/tabssp";
 import {Branding, Describe, Market, ProductsChoice, SellPosition} from "./components/analyticChoice";
 import { useSelector } from "react-redux";
 import StoreForm from "./components/storeForm";
+import Aurora from "../../../components/ui/animations/auraBackground";
+import BlurText from "../../../components/ui/animations/blurText";
 
 
 
@@ -12,14 +14,7 @@ export default function CreateStore({}){
   const [animationTime , setAnimationTime] = useState('5s')
   const [style , setSyle] = useState(
     {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center" ,
-       overflow: "hidden" ,
-      backgroundColor:' hsla(0,0%,100%,1) ' ,
      minHeight: "100vh" ,
-    backgroundImage: ' radial-gradient(at 17% 0%, hsla(281deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 98% 1%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 33% 87%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 65% 86%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 61% 21%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 36% 1%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 31% 31%, hsla(248deg, 100%, 66%, 0.8) 0, transparent 50%), radial-gradient(at 42% 32%, hsla(248deg, 83%, 76%, 1) 0, transparent 50%), radial-gradient(at 0% 1%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 10% 66%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 64% 56%, hsl(222.1, 100%, 57.3%) 0, transparent 50%), radial-gradient(at 68% 46%, hsla(180deg, 43%, 53%, 1) 0, transparent 50%), radial-gradient(at 99% 98%, hsla(300deg, 0%, 94%, 1) 0, transparent 50%), radial-gradient(at 67% 59%, hsla(194deg, 100%, 73%, 1) 0, transparent 50%)' ,
-    animation: `pulseGradient 5s infinite alternate ease-in-out`
     }
   )
 
@@ -87,38 +82,50 @@ const {user , isAuthinticated} = useSelector((state)=>state.user)
   ];
   const [tabs , setTabs] = useState(tabsCon)
   const [currentTab, setCurrentTab] = useState(0); 
-  useEffect(()=>{console.log(currentTab)} , [currentTab])
-  useEffect(() => {
-  
-    const timer = setTimeout(() => {
-      setShowMessage(false);
-    }, 4000);
 
-    
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     console.log("Animation Time updated:", animationTime);
  }, [animationTime]);
  
-  const message = [
-    'Welcome' ,
-    'To' ,
-    'Supplify'
-  ]
+ const handleAnimationComplete = () => {
+   setShowMessage(false)
+};
    return(
+    
   <div 
-  className=""
+  className="relative bg-black overflow-hidden max-h-screen"
    style={style}
   >
+      
+    <Aurora
+      colorStops={["#a51aff", "#a51aff", "#a51aff"]}
+      blend={0.2}
+      amplitude={4.0}
+      speed={0.7}
+    />
+ 
     {
       showMessage && (
-        <MorphingText texts={message} />
+       
+          <div className="absolute inset-0 h-screen max-h-screen w-full flex items-center justify-center pointer-events-none">
+  <BlurText
+       text="Welcome!"
+       delay={150}
+       animateBy="words"
+       direction="top"
+       onAnimationComplete={handleAnimationComplete}
+       className="text-[4rem] font-extrabold text-white "
+     />
+  </div>
+ 
+    
       )
     }
     {!showMessage && !showStoreForm && (
-      <div className="h-[20rem] md:h-[40rem] justify-center items-center [perspective:1000px] relative b flex flex-col max-w-5xl mx-auto w-full  my-40 mt-0">
+         <div className="absolute inset-0 h-screen max-h-screen w-full flex items-center justify-center ">
+      <div className="w-full h-full flex items-center justify-center max-h-screen">
+     <div className="h-[400px] justify-center items-center [perspective:1000px] relative b flex flex-col max-w-5xl mx-auto w-full  my-40 mt-0">
        <HoverEffectContainer
         setTabs={setTabs}
         currentTab={currentTab}
@@ -127,11 +134,14 @@ const {user , isAuthinticated} = useSelector((state)=>state.user)
         isOnlyCurrentTabVisible={onlyVisible}
         switchTab={switchTab}
        
-      />
-    </div>
+       />
+      </div>
+        </div>
+      </div>
     )}
     {!showMessage && showStoreForm && (
-      <StoreForm setAnimationTime={setSyle} />
+       <div className="absolute inset-0 h-screen max-h-screen w-full flex items-center justify-center ">
+      <StoreForm setAnimationTime={setSyle} /></div>
     )}
   
   </div>

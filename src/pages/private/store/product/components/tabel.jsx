@@ -158,9 +158,9 @@ const channels  = [{
     const [hovered, setHovered] = useState(null);
 
     return (
-        <table className="w-full   text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs bg-[#f4f4f4] costume-tr">
-            <tr className="text-black rounded-t-xl custom-tr-hd">
+        <table className="w-full table-auto border-separate border-spacing-0 p-[1px]  text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead className="text-xs font-light  ">
+            <tr className="text-gray-500 rounded-t-xl color-th shadow-input rounded-[.5rem]   ">
                 <th scope="col" className="px-[12px] py-[8px]">
                     <Checkbox
                         defaultSelected
@@ -183,10 +183,10 @@ const channels  = [{
                         <th scope="col" className="px-[12px] py-[8px]">Category</th>
                         <th scope="col" className="px-[12px] py-[8px]">Type</th>
                         <th scope="col" className="px-[12px] py-[8px]">Vendor</th>
-                    </>
+                    </> 
                 ) : (
                     <>
-                          <th scope="col" style={{userSelect:'none'}} className="text-[#f4f4f4] px-[12px]  py-[8px]">Status</th>
+                          <th scope="col" style={{userSelect:'none'}} className="text-[#f4f4f4] px-[12px] font-normal  py-[8px]">Status</th>
                         <th scope="col"  style={{userSelect:'none'}}  className=" text-[#f4f4f4] px-[12px] py-[8px]">Inventory</th>
                         <th scope="col" style={{userSelect:'none'}}  className=" text-[#f4f4f4] px-[12px] py-[8px]">Sales Channel</th>
                         <th scope="col" style={{userSelect:'none'}}  className=" text-[#f4f4f4] px-[12px] py-[8px]">Markets</th>
@@ -204,7 +204,7 @@ const channels  = [{
 
 
             </thead>
-            <tbody className='crusor-poiter'>
+            <tbody className='shadow-input border-collapse rounded-[.5rem] crusor-poiter'>
             {filteredProducts.map((product) => (
                 <tr onClick={()=>(sendToEdit(product._id , product))} onMouseEnter={() => setEnterTable(product._id)} onMouseLeave={() => setEnterTable('')}
                     key={product._id} className="hover:opacity-[var(--nextui-hover-opacity)] cursor-pointer custom-tr">
@@ -227,7 +227,7 @@ const channels  = [{
                         scope="row"
                         className="px-3 py-2  "
                     >
-                        <div className="flex items-center mr-3 text-black">
+                        <div className="flex items-center mr-3 text-[black] font-[550]">
               <span
                   className="mr-3"
                   style={{
@@ -251,7 +251,8 @@ const channels  = [{
 
                 )}
               </span>
-                            {product.title}
+                     <span  className='first-letter:uppercase text-black        '>  {product.title} </span>
+                             
                         </div>
                     </th>
                     <td className="px-3 py-2">

@@ -52,11 +52,16 @@ export default function SignUp(){
       if (!input.password) return setPasswordScore(0);
       setPasswordScore(zxcvbn(input.password).score + 1);
     }; 
-    
+  useEffect(()=>{
+    console.log(store)
+    if (store === null) {
+       navigate('/create-store');
+      }}
+    , [store])  
     if (store === null) {
     return navigate('/create-store');
     }
-  
+    
     return(
   <AuthLayout>
      <div className="center " >

@@ -1,7 +1,7 @@
 import React from 'react'
-import { HoverEffect } from '../../../../components/ui/crad-hover-effect'
+import { HoverEffect } from '../../../../components/ui/animations/crad-hover-effect'
 import { HomeCardData } from '../../../../data/constants'
-import TextGenerateEffect from '../../../../components/ui/gardual-text-spacing'
+import TextGenerateEffect from '../../../../components/ui/animations/gardual-text-spacing'
 
 const  Features  = () => {
   return (

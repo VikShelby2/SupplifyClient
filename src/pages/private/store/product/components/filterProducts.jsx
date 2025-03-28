@@ -10,9 +10,8 @@ import {
 import {   productCategories, productStatus } from '../../../../../data/constants';
 import {  handleListCollections, handleListTags } from '../../../../../api/store/products';
 import { useRecoilValue } from 'recoil';
-import userAtom from '../../../../../context/atoms/userAtom';
 import { storeAtom } from '../../../../../context/atoms/storeAtom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setProducts } from '../../../../../context/redux/productsSlice';
 export const SelectorIcon = (props) => {
     return (
@@ -48,7 +47,7 @@ const FilterProducts =  ({  products , setNoOption }) => {
   const [selectedGift, setSelectedGift] = useState([])
   const [selectedCollection , setSelectedCollection] = useState([])
   const [ loading  , setLoading] = useState(false)
-  const user = useRecoilValue(userAtom)
+   const {user} = useSelector((state)=>state.user)
   const [tags , setTags] = useState([])
   const store = useRecoilValue(storeAtom)
   const [collections , setCollections] = useState([])

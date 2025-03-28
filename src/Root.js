@@ -22,7 +22,7 @@ function Root() {
 
   useEffect(() => {
     // Dispatch the authUser action to fetch authentication data
-    dispatch(authUser());
+    dispatch(authUser(setStore));
   }, [dispatch]);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function Root() {
     }
   }, [user, setStore]);
 
-  // Create the router object once to avoid re-creating it during every render
+  // Create the router objqect once to avoid re-creating it during every render
   const router = createBrowserRouter([
     ...RootRoute(),
     ...AuthRoute({ useSelector }),
