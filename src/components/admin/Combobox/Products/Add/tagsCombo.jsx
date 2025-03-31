@@ -1,81 +1,102 @@
-import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions, Transition } from '@headlessui/react';
+import {
+  Combobox,
+  ComboboxButton,
+  ComboboxInput,
+  ComboboxOption,
+  ComboboxOptions,
+  Transition,
+} from '@headlessui/react'
 
-import { Checkbox } from '@nextui-org/react';
-import { useEffect, useState } from 'react';
+import { Checkbox } from '@nextui-org/react'
+import { useEffect, useState } from 'react'
 
-import { Label } from '../../../../../pages/public/Home/components/label';
-import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
-import { handleAddTag, handleListTags } from '../../../../../api/store/products';
+import { Label } from '../../../../../pages/public/Home/components/label'
+import { useMotionTemplate, useMotionValue, motion } from 'framer-motion'
+import { handleAddTag, handleListTags } from '../../../../../api/store/products'
 
-import { useSelector } from 'react-redux';
-export default function TagsCombobox({ placeholder, autoStyle, selectedOptions, setSelectedOptions, styles, noLabel  , isDropdownOpen , setIsDropdownOpen , AddTagOpt = false}) {
-  const [options, setOptions] = useState([]);
-  const {user} = useSelector((state)=>state.user)
+import { useSelector } from 'react-redux'
+export default function TagsCombobox({
+  placeholder,
+  autoStyle,
+  selectedOptions,
+  setSelectedOptions,
+  styles,
+  noLabel,
+  isDropdownOpen,
+  setIsDropdownOpen,
+  AddTagOpt = false,
+}) {
+  const [options, setOptions] = useState([])
+  const { user } = useSelector((state) => state.user)
 
-  const [query, setQuery] = useState('');
-  const effectiveAdd = AddTagOpt !== false;
+  const [query, setQuery] = useState('')
+  const effectiveAdd = AddTagOpt !== false
 
   useEffect(() => {
     if (user?._id) {
-      handleListTags(user._id, setOptions);
+      handleListTags(user._id, setOptions)
     }
-  }, [user]);
+  }, [user])
 
-
-
-  const filteredOptions = query === ''
-    ? options || []
-    : (options || []).filter((option) => {
-      return option.name.toLowerCase().includes(query.toLowerCase());
-    });
+  const filteredOptions =
+    query === ''
+      ? options || []
+      : (options || []).filter((option) => {
+          return option.name.toLowerCase().includes(query.toLowerCase())
+        })
 
   const handleCheckboxChange = (option, e) => {
     if (isSelected(option)) {
-      setSelectedOptions(selectedOptions.filter((selected) => selected.id !== option.id));
+      setSelectedOptions(
+        selectedOptions.filter((selected) => selected.id !== option.id)
+      )
     } else {
-      setSelectedOptions([...selectedOptions, option]);
+      setSelectedOptions([...selectedOptions, option])
     }
-  };
+  }
 
   const isSelected = (option) => {
-    return selectedOptions.some((selected) => selected.id === option.id);
-  };
+    return selectedOptions.some((selected) => selected.id === option.id)
+  }
 
   const handleInputChange = (value) => {
-    setQuery(value);
-  };
+    setQuery(value)
+  }
 
   const handleAddNewTag = () => {
     if (query.trim() !== '') {
-      handleAddTag(user._id, query, options, setOptions);
+      handleAddTag(user._id, query, options, setOptions)
     }
-  };
+  }
 
-  const radius = 100; // change this to increase the radius of the hover effect
-  const [visible, setVisible] = useState(false);
+  const radius = 100 // change this to increase the radius of the hover effect
+  const [visible, setVisible] = useState(false)
 
-  let mouseX = useMotionValue(0);
-  let mouseY = useMotionValue(0);
+  let mouseX = useMotionValue(0)
+  let mouseY = useMotionValue(0)
 
   function handleMouseMove({ currentTarget, clientX, clientY }) {
-    let { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
+    let { left, top } = currentTarget.getBoundingClientRect()
+    mouseX.set(clientX - left)
+    mouseY.set(clientY - top)
   }
 
   return (
-    <Combobox multiple >
-      <div className={`relative mt-[1rem] ${autoStyle}`} style={{ justifyContent: 'center', alignItems: 'center', gap: '5px' }}>
-        {!noLabel && (<Label className="text-black">Tags</Label>)}
+    <Combobox multiple>
+      <div
+        className={`relative mt-[1rem] ${autoStyle}`}
+        style={{ justifyContent: 'center', alignItems: 'center', gap: '5px' }}
+      >
+        {!noLabel && <Label className="text-black">Tags</Label>}
         <motion.div
           style={{
             background: useMotionTemplate`
               radial-gradient(
-                ${visible ? `${radius}px` : "0px"} circle at ${mouseX}px ${mouseY}px,
+                ${visible ? `${radius}px` : '0px'} circle at ${mouseX}px ${mouseY}px,
                 var(--blue-500),
                 transparent 80%
               )
-            `
+            `,
           }}
           onMouseMove={handleMouseMove}
           onMouseEnter={() => setVisible(true)}
@@ -106,7 +127,6 @@ group-hover/input:shadow-none transition duration-400
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
         style={{ zIndex: '10000000000000000000000000000000' }}
-       
       >
         <ComboboxOptions
           anchor="bottom"
@@ -127,22 +147,19 @@ group-hover/input:shadow-none transition duration-400
                     id="default-checkbox"
                     isSelected={isSelected(option)}
                     onChange={(e) => handleCheckboxChange(option, e)}
-                    radius='small'
+                    radius="small"
                     color="secondary"
-                  >
-                  </Checkbox>
+                  ></Checkbox>
                 </label>
               </ComboboxOption>
             ))
           ) : effectiveAdd === true ? (
             <>
-            <div
-           
-              className="cursor-pointer text-sm px-3 py-2 text-black hover:bg-gray-100 rounded-lg"
-            >
-              Tag "{query}" does not exist
-            </div>
-          </>)  : (
+              <div className="cursor-pointer text-sm px-3 py-2 text-black hover:bg-gray-100 rounded-lg">
+                Tag "{query}" does not exist
+              </div>
+            </>
+          ) : (
             <div
               onClick={handleAddNewTag}
               className="cursor-pointer text-sm px-3 py-2 text-black hover:bg-gray-100 rounded-lg"
@@ -153,5 +170,5 @@ group-hover/input:shadow-none transition duration-400
         </ComboboxOptions>
       </Transition>
     </Combobox>
-  );
+  )
 }

@@ -1,14 +1,13 @@
+import { useEffect } from 'react'
+import { motion, stagger, useAnimate } from 'framer-motion'
+import { cn } from '../../../lib/utils'
+const TextGenerateEffect = ({ words, className }) => {
+  const [scope, animate] = useAnimate()
+  const wordsArray = words.split(' ')
 
-import { useEffect } from "react";
-import { motion, stagger, useAnimate } from "framer-motion";
-import { cn } from "../../../lib/utils";
- const TextGenerateEffect = ({ words, className }) => {
-  const [scope, animate] = useAnimate();
-  const wordsArray = words.split(" ");
-  
   useEffect(() => {
     animate(
-      "span",
+      'span',
       {
         opacity: 1,
       },
@@ -16,8 +15,8 @@ import { cn } from "../../../lib/utils";
         duration: 2,
         delay: stagger(0.2),
       }
-    );
-  }, [scope.current]);
+    )
+  }, [scope.current])
 
   const renderWords = () => {
     return (
@@ -27,17 +26,13 @@ import { cn } from "../../../lib/utils";
             key={word + idx}
             className="dark:text-white text-white opacity-0"
           >
-            {word}{" "}
+            {word}{' '}
           </motion.span>
         ))}
       </motion.div>
-    );
-  };
+    )
+  }
 
-  return (
-    <div className={cn("font-bold", className)}>
-          {renderWords()} 
-    </div>
-  );
-};
-export default TextGenerateEffect;
+  return <div className={cn('font-bold', className)}>{renderWords()}</div>
+}
+export default TextGenerateEffect

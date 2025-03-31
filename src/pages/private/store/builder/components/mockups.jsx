@@ -1,4 +1,3 @@
-
 export function Iphone15Pro({
   width = 433,
   height = 882,
@@ -97,5 +96,5 @@ export function Iphone15Pro({
         </clipPath>
       </defs>
     </svg>
-  );
+  )
 }

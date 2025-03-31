@@ -1,20 +1,18 @@
-import { cn } from "../../../lib/utils";
-import { motion, MotionProps } from "motion/react";
-import React from "react";
-
-
+import { cn } from '../../../lib/utils'
+import { motion, MotionProps } from 'motion/react'
+import React from 'react'
 
 export function AuroraText({
   className,
   children,
-  as: Component = "span",
+  as: Component = 'span',
   ...props
 }) {
-  const MotionComponent = motion.create(Component);
+  const MotionComponent = motion.create(Component)
 
   return (
     <MotionComponent
-      className={cn("relative inline-flex overflow-hidden", className)}
+      className={cn('relative inline-flex overflow-hidden', className)}
       {...props}
     >
       {children}
@@ -25,5 +23,5 @@ export function AuroraText({
         <span className="pointer-events-none absolute -bottom-1/2 right-0 h-[30vw] w-[30vw] animate-[aurora-border_6s_ease-in-out_infinite,aurora-4_12s_ease-in-out_infinite_alternate] bg-[hsl(var(--color-4))] mix-blend-overlay blur-[1rem]"></span>
       </span>
     </MotionComponent>
-  );
+  )
 }

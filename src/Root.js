@@ -1,29 +1,26 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 
-import { RecoilRoot, useRecoilValue, useSetRecoilState } from "recoil";
+import { RecoilRoot, useRecoilValue, useSetRecoilState } from 'recoil'
 
-import Loading from "./pages/public/Home/components/Loading";
-import { storeAtom } from "./context/atoms/storeAtom";
-import { AuthRoute, DashboardRoute, RootRoute } from "./Routes/router";
-import { useDispatch, useSelector } from "react-redux";
-import { authUser } from "./api/auth";
-import { selectLoading } from "./context/redux/loadingSlice";
-
+import Loading from './pages/public/Home/components/Loading'
+import { storeAtom } from './context/atoms/storeAtom'
+import { AuthRoute, DashboardRoute, RootRoute } from './Routes/router'
+import { useDispatch, useSelector } from 'react-redux'
+import { authUser } from './api/auth'
+import { selectLoading } from './context/redux/loadingSlice'
 
 function Root() {
-
-  const setStore = useSetRecoilState(storeAtom);
-  const dispatch = useDispatch();
-  const { user, isAuthenticated } = useSelector((state) => state.user);
-  const isLoading = useSelector(selectLoading);
-
+  const setStore = useSetRecoilState(storeAtom)
+  const dispatch = useDispatch()
+  const { user, isAuthenticated } = useSelector((state) => state.user)
+  const isLoading = useSelector(selectLoading)
 
   useEffect(() => {
     // Dispatch the authUser action to fetch authentication data
-    dispatch(authUser(setStore));
-  }, [dispatch]);
+    dispatch(authUser(setStore))
+  }, [dispatch])
 
   useEffect(() => {
     // When the user data is available, update the store atom
@@ -31,26 +28,23 @@ function Root() {
       setStore((prevStore) => ({
         ...prevStore,
         userId: user._id,
-      }));
+      }))
     }
-  }, [user, setStore]);
+  }, [user, setStore])
 
   // Create the router objqect once to avoid re-creating it during every render
   const router = createBrowserRouter([
     ...RootRoute(),
     ...AuthRoute({ useSelector }),
     ...DashboardRoute(),
-  ]);
+  ])
 
   if (isLoading) {
-    
-    return <Loading />;
+    return <Loading />
   }
 
   // Once loading is false (data is fetched), render the routes
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />
 }
 
-export default Root;
-
-
+export default Root

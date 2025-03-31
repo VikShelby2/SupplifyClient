@@ -1,18 +1,14 @@
-import { useState } from "react";
-import { cn } from "../../../lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
+import { useState } from 'react'
+import { cn } from '../../../lib/utils'
+import { AnimatePresence, motion } from 'framer-motion'
 
-
- export const HoverEffect = ({
-  items,
-  className,
-}) => {
-  let [hoveredIndex, setHoveredIndex] = useState(null);
+export const HoverEffect = ({ items, className }) => {
+  let [hoveredIndex, setHoveredIndex] = useState(null)
 
   return (
     <div
       className={cn(
-        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 py-10",
+        'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 py-10',
         className
       )}
     >
@@ -48,17 +44,14 @@ import { AnimatePresence, motion } from "framer-motion";
         </a>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export const Card = ({
-  className,
-  children,
-}) => {
+export const Card = ({ className, children }) => {
   return (
     <div
       className={cn(
-        "rounded-2xl h-full w-full p-4 overflow-hidden bg-[#0d0d0d] border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20",
+        'rounded-2xl h-full w-full p-4 overflow-hidden bg-[#0d0d0d] border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20',
         className
       )}
     >
@@ -66,32 +59,26 @@ export const Card = ({
         <div className="p-4">{children}</div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export const CardTitle = ({
-  className,
-  children,
-}) => {
+export const CardTitle = ({ className, children }) => {
   return (
-    <h4 className={cn("text-zinc-100 font-bold tracking-wide mt-4", className)}>
+    <h4 className={cn('text-zinc-100 font-bold tracking-wide mt-4', className)}>
       {children}
     </h4>
-  );
-};
+  )
+}
 
-export const CardDescription = ({
-  className,
-  children,
-}) => {
+export const CardDescription = ({ className, children }) => {
   return (
     <p
       className={cn(
-        "mt-8 text-zinc-400 tracking-wide leading-relaxed text-sm",
+        'mt-8 text-zinc-400 tracking-wide leading-relaxed text-sm',
         className
       )}
     >
       {children}
     </p>
-  );
-};
+  )
+}

@@ -1,25 +1,25 @@
-"use client";
-import React, { Suspense, lazy } from "react";
-import { motion } from "framer-motion";
+'use client'
+import React, { Suspense, lazy } from 'react'
+import { motion } from 'framer-motion'
 const World = lazy(() =>
   import('./globe').then((module) => ({ default: module.World }))
-);
+)
 
 const GridGlobe = () => {
   const globeConfig = {
     pointSize: 4,
-    globeColor: "#062056",
+    globeColor: '#062056',
     showAtmosphere: true,
-    atmosphereColor: "#FFFFFF",
+    atmosphereColor: '#FFFFFF',
     atmosphereAltitude: 0.1,
-    emissive: "#062056",
+    emissive: '#062056',
     emissiveIntensity: 0.1,
     shininess: 0.9,
-    polygonColor: "rgba(255,255,255,0.7)",
-    ambientLight: "#38bdf8",
-    directionalLeftLight: "#ffffff",
-    directionalTopLight: "#ffffff",
-    pointLight: "#ffffff",
+    polygonColor: 'rgba(255,255,255,0.7)',
+    ambientLight: '#38bdf8',
+    directionalLeftLight: '#ffffff',
+    directionalTopLight: '#ffffff',
+    pointLight: '#ffffff',
     arcTime: 1000,
     arcLength: 0.9,
     rings: 1,
@@ -27,8 +27,8 @@ const GridGlobe = () => {
     initialPosition: { lat: 22.3193, lng: 114.1694 },
     autoRotate: true,
     autoRotateSpeed: 0.5,
-  };
-  const colors = ["#06b6d4", "#3b82f6", "#6366f1"];
+  }
+  const colors = ['#06b6d4', '#3b82f6', '#6366f1']
   const sampleArcs = [
     {
       order: 1,
@@ -390,7 +390,7 @@ const GridGlobe = () => {
       arcAlt: 0.3,
       color: colors[Math.floor(Math.random() * (colors.length - 1))],
     },
-  ];
+  ]
 
   return (
     // remove dark:bg-black bg-white h-screen md:h-auto  w-full flex-row py-20
@@ -424,12 +424,12 @@ const GridGlobe = () => {
         <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-white z-40" />
         {/* remove -bottom-20 */}
         <div className="absolute w-full h-72 md:h-full z-10">
-        <Suspense fallback={<div>Loading Globe...</div>}>
-          <World data={sampleArcs} globeConfig={globeConfig} />
+          <Suspense fallback={<div>Loading Globe...</div>}>
+            <World data={sampleArcs} globeConfig={globeConfig} />
           </Suspense>
         </div>
       </div>
     </div>
-  );
-};
-export default GridGlobe;
+  )
+}
+export default GridGlobe

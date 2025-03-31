@@ -1,98 +1,121 @@
-import React, { useState } from "react";
-import { DndProvider, useDrag, useDrop } from "react-dnd";
-import { Trash2 } from 'lucide-react';
-import { PlusCircle } from "lucide-react";
+import React, { useState } from 'react'
+import { DndProvider, useDrag, useDrop } from 'react-dnd'
+import { Trash2 } from 'lucide-react'
+import { PlusCircle } from 'lucide-react'
 
-import { RxDragHandleDots2 } from "react-icons/rx";
-import {Button} from "@nextui-org/react";
-import {Chip} from "@nextui-org/react";
-import { Input } from "../../../../../../../public/Home/components/input";
+import { RxDragHandleDots2 } from 'react-icons/rx'
+import { Button } from '@nextui-org/react'
+import { Chip } from '@nextui-org/react'
+import { Input } from '../../../../../../../public/Home/components/input'
 
-const ItemType = "OPTION_VALUE";
+const ItemType = 'OPTION_VALUE'
 
-const DraggableOptionValue = ({ optionValue, isLast , index, moveOptionValue, handleOptionValueChange, deleteOptionValue }) => {
-  const [isDropped, setIsDropped] = useState(false);
+const DraggableOptionValue = ({
+  optionValue,
+  isLast,
+  index,
+  moveOptionValue,
+  handleOptionValueChange,
+  deleteOptionValue,
+}) => {
+  const [isDropped, setIsDropped] = useState(false)
   const [{ isDragging }, drag, preview] = useDrag({
     type: ItemType,
     item: { index },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
-  });
+  })
 
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: ItemType,
     drop: () => {
-      setIsDropped(true); // Set dropped state to true
-    },  
+      setIsDropped(true) // Set dropped state to true
+    },
     hover: (draggedItem) => {
       if (draggedItem.index !== index) {
-        moveOptionValue(draggedItem.index, index);
-        draggedItem.index = index;
+        moveOptionValue(draggedItem.index, index)
+        draggedItem.index = index
       }
     },
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),
-  });
+  })
 
   return (
     <div ref={drop} className="">
-
-     <div ref={drag} className={`flex items-center py-2   ${isDragging ? 'cursor-grabbing' : ''}
-`}> 
-      <Input
-        type="text"
-        variant="primaryWhite"
-        name="optionValue"
-        
-        outerBg={`${isOver && canDrop ? 'white' : ''}`}
-        value={optionValue.name}
-        outerStyle={` ${isOver && canDrop ? ' rounded-sm bg-gray-100 w-full h-[38px]'   : 'w-full'}`}
-        id="dnd-op-v"
-        placeholder="Black , Red , Large , Small"
-        onChange={(e) => handleOptionValueChange(index, e)}
-        required
-      />
-      <Button
-        isIconOnly
-        radius="full"
-        variant="light"
-        className="ml-2 text-black"
-    
+      <div
+        ref={drag}
+        className={`flex items-center py-2   ${isDragging ? 'cursor-grabbing' : ''}
+`}
       >
-        <RxDragHandleDots2 className="w-6 h-6" />
-      </Button>
-      <Button
-        variant="light"
-        isIconOnly
-        radius="full"
-        onClick={() => deleteOptionValue(index)}
-        className="ml-2 text-red-600 hover:text-red-800"
-      >
-        <Trash2 />
-      </Button>
-    </div> 
+        <Input
+          type="text"
+          variant="primaryWhite"
+          name="optionValue"
+          outerBg={`${isOver && canDrop ? 'white' : ''}`}
+          value={optionValue.name}
+          outerStyle={` ${isOver && canDrop ? ' rounded-sm bg-gray-100 w-full h-[38px]' : 'w-full'}`}
+          id="dnd-op-v"
+          placeholder="Black , Red , Large , Small"
+          onChange={(e) => handleOptionValueChange(index, e)}
+          required
+        />
+        <Button
+          isIconOnly
+          radius="full"
+          variant="light"
+          className="ml-2 text-black"
+        >
+          <RxDragHandleDots2 className="w-6 h-6" />
+        </Button>
+        <Button
+          variant="light"
+          isIconOnly
+          radius="full"
+          onClick={() => deleteOptionValue(index)}
+          className="ml-2 text-red-600 hover:text-red-800"
+        >
+          <Trash2 />
+        </Button>
+      </div>
     </div>
-    
-  );
-};
+  )
+}
 
-const OptionValuesList = ({ variantIndex, optionValues, handleOptionValueChange, addOptionValue, moveOptionValue, deleteOptionValue }) => {
+const OptionValuesList = ({
+  variantIndex,
+  optionValues,
+  handleOptionValueChange,
+  addOptionValue,
+  moveOptionValue,
+  deleteOptionValue,
+}) => {
   return (
     <div className="mt-2">
-    {optionValues.length > 0 && (<label className="block mb-2 text-sm font-medium text-black">{optionValues.length > 0  ? 'Option Values' : ''}</label>)}
-      
+      {optionValues.length > 0 && (
+        <label className="block mb-2 text-sm font-medium text-black">
+          {optionValues.length > 0 ? 'Option Values' : ''}
+        </label>
+      )}
+
       {optionValues.map((optionValue, index) => (
         <DraggableOptionValue
           key={index}
           index={index}
           isLast={index === optionValues.length - 1}
           optionValue={optionValue}
-          moveOptionValue={(fromIndex, toIndex) => moveOptionValue(variantIndex, fromIndex, toIndex)}
-          handleOptionValueChange={(optionIndex, e) => handleOptionValueChange(variantIndex, optionIndex, e)}
-          deleteOptionValue={(optionIndex) => deleteOptionValue(variantIndex, optionIndex)}
+          moveOptionValue={(fromIndex, toIndex) =>
+            moveOptionValue(variantIndex, fromIndex, toIndex)
+          }
+          handleOptionValueChange={(optionIndex, e) =>
+            handleOptionValueChange(variantIndex, optionIndex, e)
+          }
+          deleteOptionValue={(optionIndex) =>
+            deleteOptionValue(variantIndex, optionIndex)
+          }
         />
       ))}
       <button
@@ -103,8 +126,8 @@ const OptionValuesList = ({ variantIndex, optionValues, handleOptionValueChange,
         Add Option Value
       </button>
     </div>
-  );
-};
+  )
+}
 
 const DraggableInput = ({
   variant,
@@ -115,7 +138,7 @@ const DraggableInput = ({
   moveOptionValue,
   deleteVariant,
   addVariantToArray,
-  deleteOptionValue
+  deleteOptionValue,
 }) => {
   return (
     <div className="h-auto border-b p-2 mb-2">
@@ -165,61 +188,82 @@ const DraggableInput = ({
         </div>
       </div>
     </div>
-  );
-};
-const DraggableVariant = ({ variant, index, moveVariant , editVariant , deleteOptionValue}) => {
+  )
+}
+const DraggableVariant = ({
+  variant,
+  index,
+  moveVariant,
+  editVariant,
+  deleteOptionValue,
+}) => {
   const [, drag] = useDrag({
-    type: "VARIANT",
+    type: 'VARIANT',
     item: { index },
-  });
+  })
 
   const [, drop] = useDrop({
-    accept: "VARIANT",
+    accept: 'VARIANT',
     hover(item) {
       if (!dragRef.current || index === item.index) {
-        return;
+        return
       }
-      moveVariant(item.index, index);
-      item.index = index;
+      moveVariant(item.index, index)
+      item.index = index
     },
-  });
+  })
 
-  const dragRef = React.useRef(null);
-  drag(drop(dragRef));
+  const dragRef = React.useRef(null)
+  drag(drop(dragRef))
 
   return (
     <div ref={dragRef} className="">
-    <div className="w-full px-2 flex items-center " style={{justifyContent:'space-between'}}>
-     <h4 className="font-medium text-xl text-black" style={{fontWeight:'650'}}>{variant.optionName}</h4>
-       <button className="pr-up-btn" onClick={() => editVariant(index)}><span className="text-sm" style={{fontWeight:'650'}} >Edit</span></button>
-    </div>
-    <div className="w-full px-2 flex mt-1 justify-start items-start gap-2"> 
-      
+      <div
+        className="w-full px-2 flex items-center "
+        style={{ justifyContent: 'space-between' }}
+      >
+        <h4
+          className="font-medium text-xl text-black"
+          style={{ fontWeight: '650' }}
+        >
+          {variant.optionName}
+        </h4>
+        <button className="pr-up-btn" onClick={() => editVariant(index)}>
+          <span className="text-sm" style={{ fontWeight: '650' }}>
+            Edit
+          </span>
+        </button>
+      </div>
+      <div className="w-full px-2 flex mt-1 justify-start items-start gap-2">
         {variant.optionValues.map((optionValue, idx) => (
-        <Chip key={idx}  variant="bordered" 
-    classNames={{
-        base: "bg-white",
-        content: "drop-shadow shadow-black text-black",
-      }}
-    >
-  {optionValue.name}
-</Chip>
+          <Chip
+            key={idx}
+            variant="bordered"
+            classNames={{
+              base: 'bg-white',
+              content: 'drop-shadow shadow-black text-black',
+            }}
+          >
+            {optionValue.name}
+          </Chip>
         ))}
-    
-     </div> 
+      </div>
     </div>
-  );
-};
+  )
+}
 
-const AddedVariantsList = ({ addedVariants, setAddedVariants, editVariant , deleteOptionValue }) => {
+const AddedVariantsList = ({
+  addedVariants,
+  setAddedVariants,
+  editVariant,
+  deleteOptionValue,
+}) => {
   const moveVariant = (fromIndex, toIndex) => {
-    const newVariants = [...addedVariants];
-    const [movedVariant] = newVariants.splice(fromIndex, 1);
-    newVariants.splice(toIndex, 0, movedVariant);
-    setAddedVariants(newVariants);
-  };
-
- 
+    const newVariants = [...addedVariants]
+    const [movedVariant] = newVariants.splice(fromIndex, 1)
+    newVariants.splice(toIndex, 0, movedVariant)
+    setAddedVariants(newVariants)
+  }
 
   return (
     <div className="mt-4 ">
@@ -232,71 +276,103 @@ const AddedVariantsList = ({ addedVariants, setAddedVariants, editVariant , dele
             editVariant={editVariant}
             deleteOptionValue={deleteOptionValue}
           />
-          
         </div>
       ))}
     </div>
-  );
+  )
+}
 
-};
-
-const OptionKanban = ({variants , setVariants , addedVariants , setAddedVariants}) => {
-  
-
+const OptionKanban = ({
+  variants,
+  setVariants,
+  addedVariants,
+  setAddedVariants,
+}) => {
   const addVariant = () => {
-    setVariants([...variants, { optionName: "", optionValues: [{ name: ""  ,photo: null, price: '', compareAt: '', sku: '', barcode: '' , quantity: 0 , country: '' , location: '' , weight: '' , sellStock: false  }] }]);
-  };
+    setVariants([
+      ...variants,
+      {
+        optionName: '',
+        optionValues: [
+          {
+            name: '',
+            photo: null,
+            price: '',
+            compareAt: '',
+            sku: '',
+            barcode: '',
+            quantity: 0,
+            country: '',
+            location: '',
+            weight: '',
+            sellStock: false,
+          },
+        ],
+      },
+    ])
+  }
 
   const handleInputChange = (index, event) => {
-    const newVariants = [...variants];
-    newVariants[index][event.target.name] = event.target.value;
-    setVariants(newVariants);
-  };
+    const newVariants = [...variants]
+    newVariants[index][event.target.name] = event.target.value
+    setVariants(newVariants)
+  }
 
   const handleOptionValueChange = (variantIndex, optionIndex, event) => {
-    const newVariants = [...variants];
-    newVariants[variantIndex].optionValues[optionIndex].name = event.target.value;
-    setVariants(newVariants);
-  };
+    const newVariants = [...variants]
+    newVariants[variantIndex].optionValues[optionIndex].name =
+      event.target.value
+    setVariants(newVariants)
+  }
   const deleteOptionValue = (variantIndex, optionIndex) => {
-    const newVariants = [...variants];
-    newVariants[variantIndex].optionValues = newVariants[variantIndex].optionValues.filter((_, i) => i !== optionIndex);
-    setVariants(newVariants);
-  };
+    const newVariants = [...variants]
+    newVariants[variantIndex].optionValues = newVariants[
+      variantIndex
+    ].optionValues.filter((_, i) => i !== optionIndex)
+    setVariants(newVariants)
+  }
   const addOptionValue = (variantIndex) => {
-    const newVariants = [...variants];
-    newVariants[variantIndex].optionValues.push({ name: "" });
-    setVariants(newVariants);
-  };
+    const newVariants = [...variants]
+    newVariants[variantIndex].optionValues.push({ name: '' })
+    setVariants(newVariants)
+  }
 
   const moveOptionValue = (variantIndex, fromIndex, toIndex) => {
-    const newVariants = [...variants];
-    const [movedOptionValue] = newVariants[variantIndex].optionValues.splice(fromIndex, 1);
-    newVariants[variantIndex].optionValues.splice(toIndex, 0, movedOptionValue);
-    setVariants(newVariants);
-  };
+    const newVariants = [...variants]
+    const [movedOptionValue] = newVariants[variantIndex].optionValues.splice(
+      fromIndex,
+      1
+    )
+    newVariants[variantIndex].optionValues.splice(toIndex, 0, movedOptionValue)
+    setVariants(newVariants)
+  }
 
   const deleteVariant = (index) => {
-    const newVariants = variants.filter((_, i) => i !== index);
-    setVariants(newVariants);
-  };
+    const newVariants = variants.filter((_, i) => i !== index)
+    setVariants(newVariants)
+  }
 
   const addVariantToArray = (index) => {
-    const variantToAdd = variants[index];
-    setAddedVariants((prevAddedVariants) => [...prevAddedVariants, variantToAdd]);
-    const newVariants = variants.filter((_, i) => i !== index);
-    setVariants(newVariants);
-  };
+    const variantToAdd = variants[index]
+    setAddedVariants((prevAddedVariants) => [
+      ...prevAddedVariants,
+      variantToAdd,
+    ])
+    const newVariants = variants.filter((_, i) => i !== index)
+    setVariants(newVariants)
+  }
 
   const editVariant = (index) => {
-    const variantToEdit = addedVariants[index];
-    setVariants([...variants, variantToEdit]);
-    setAddedVariants(addedVariants.filter((_, i) => i !== index));
-  };
+    const variantToEdit = addedVariants[index]
+    setVariants([...variants, variantToEdit])
+    setAddedVariants(addedVariants.filter((_, i) => i !== index))
+  }
 
   return (
     <div className="w-full px-3  pb-2">
-      <div className={`${variants.length > 0 ? "h-auto  shadow-input mb-[1rem] p-[20px] mt-[.75rem] rounded-[.5rem]" : ''}`} >
+      <div
+        className={`${variants.length > 0 ? 'h-auto  shadow-input mb-[1rem] p-[20px] mt-[.75rem] rounded-[.5rem]' : ''}`}
+      >
         {variants.map((variant, index) => (
           <DraggableInput
             key={index}
@@ -312,15 +388,24 @@ const OptionKanban = ({variants , setVariants , addedVariants , setAddedVariants
           />
         ))}
         <div className="justify-center flex items-center px-2 py-2">
-          <button onClick={addVariant} className="flex items-center w-full justify-center gap-1 text-md text-[#fff]" style={{ fontWeight: '650' }}>
+          <button
+            onClick={addVariant}
+            className="flex items-center w-full justify-center gap-1 text-md text-[#fff]"
+            style={{ fontWeight: '650' }}
+          >
             <PlusCircle className="h-5 w-5 text-black fill-white" />
-           <span className="mr-3 text-black" > Add Variant</span>
+            <span className="mr-3 text-black"> Add Variant</span>
           </button>
         </div>
-        <AddedVariantsList addedVariants={addedVariants} setAddedVariants={setAddedVariants} editVariant={editVariant} deleteOptionValue={deleteOptionValue}/>
+        <AddedVariantsList
+          addedVariants={addedVariants}
+          setAddedVariants={setAddedVariants}
+          editVariant={editVariant}
+          deleteOptionValue={deleteOptionValue}
+        />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default OptionKanban;
+export default OptionKanban

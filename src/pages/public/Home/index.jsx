@@ -5,11 +5,11 @@ import Features from './components/feauters'
 
 const Home = () => {
   return (
-  <>
-   <NavbarHome />
-   <Hero />
-   <Features/>
-  </>
+    <>
+      <NavbarHome />
+      <Hero />
+      <Features />
+    </>
   )
 }
 

@@ -1,5 +1,5 @@
-import React from 'react';
-import { cva } from 'class-variance-authority';
+import React from 'react'
+import { cva } from 'class-variance-authority'
 
 // Define the button outer and inner style variants
 const outerButtonStyles = cva(
@@ -17,40 +17,37 @@ const outerButtonStyles = cva(
       intent: 'stone',
     },
   }
-);
+)
 
-const innerButtonStyles = cva(
-  'bg-gradient-to-b rounded-[.4rem] ',
-  {
-    variants: {
-      intent: {
-        primary: 'from-violet-500 to-violet-400',
-        secondary: 'from-green-400 to-green-600',
-        tertiary: 'from-red-400 to-red-600',
-        stone: 'from-stone-200/40 to-white/80',
-      },
-      size: {
-       default: 'px-[1rem] py-2' ,
-       sm:'px-[.5rem] py-[.2rem]'
-      }
+const innerButtonStyles = cva('bg-gradient-to-b rounded-[.4rem] ', {
+  variants: {
+    intent: {
+      primary: 'from-violet-500 to-violet-400',
+      secondary: 'from-green-400 to-green-600',
+      tertiary: 'from-red-400 to-red-600',
+      stone: 'from-stone-200/40 to-white/80',
     },
-    defaultVariants: {
-      intent: 'stone',
-      size:'default'
+    size: {
+      default: 'px-[1rem] py-2',
+      sm: 'px-[.5rem] py-[.2rem]',
     },
-  }
-);
+  },
+  defaultVariants: {
+    intent: 'stone',
+    size: 'default',
+  },
+})
 
-const Button = ({ children, intent = 'stone'  , size }) => {
+const Button = ({ children, intent = 'stone', size }) => {
   return (
     <button className={outerButtonStyles({ intent })}>
-      <div className={innerButtonStyles({ intent , size })}>
+      <div className={innerButtonStyles({ intent, size })}>
         <div className="flex gap-2 items-center">
           <span className="">{children}</span>
         </div>
       </div>
     </button>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button

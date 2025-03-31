@@ -1,24 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-toasterPoistion: ''
-};
+  toasterPoistion: '',
+}
 
 const providersSlice = createSlice({
   name: 'providers',
   initialState,
   reducers: {
     setPositionOffToast: (state, action) => {
-      state.toasterPoistion = action.payload;
+      state.toasterPoistion = action.payload
     },
-  
   },
-});
+})
 
 // Export actions
-export const { 
- setPositionOffToast
-} = providersSlice.actions;
+export const { setPositionOffToast } = providersSlice.actions
 
 // Export the reducer
-export default providersSlice.reducer;
+export default providersSlice.reducer

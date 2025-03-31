@@ -1,11 +1,7 @@
 import React from 'react'
 
 const AddLayout = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+  return <div></div>
 }
 
 export default AddLayout

@@ -1,5 +1,5 @@
-import { useRef, useEffect, useState } from 'react';
-import { useSprings, animated } from '@react-spring/web';
+import { useRef, useEffect, useState } from 'react'
+import { useSprings, animated } from '@react-spring/web'
 
 const BlurText = ({
   text = '',
@@ -14,41 +14,46 @@ const BlurText = ({
   easing = 'easeOutCubic',
   onAnimationComplete,
 }) => {
-  const elements = animateBy === 'words' ? text.split(' ') : text.split('');
-  const [inView, setInView] = useState(false);
-  const ref = useRef();
-  const animatedCount = useRef(0);
+  const elements = animateBy === 'words' ? text.split(' ') : text.split('')
+  const [inView, setInView] = useState(false)
+  const ref = useRef()
+  const animatedCount = useRef(0)
 
   // Default animations based on direction
   const defaultFrom =
     direction === 'top'
-      ? { filter: 'blur(10px)', opacity: 0, transform: 'translate3d(0,-50px,0)' }
-      : { filter: 'blur(10px)', opacity: 0, transform: 'translate3d(0,50px,0)' };
+      ? {
+          filter: 'blur(10px)',
+          opacity: 0,
+          transform: 'translate3d(0,-50px,0)',
+        }
+      : { filter: 'blur(10px)', opacity: 0, transform: 'translate3d(0,50px,0)' }
 
   const defaultTo = [
     {
       filter: 'blur(5px)',
       opacity: 0.5,
-      transform: direction === 'top' ? 'translate3d(0,5px,0)' : 'translate3d(0,-5px,0)',
+      transform:
+        direction === 'top' ? 'translate3d(0,5px,0)' : 'translate3d(0,-5px,0)',
     },
     { filter: 'blur(0px)', opacity: 1, transform: 'translate3d(0,0,0)' },
-  ];
+  ]
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setInView(true);
-          observer.unobserve(ref.current);
+          setInView(true)
+          observer.unobserve(ref.current)
         }
       },
       { threshold, rootMargin }
-    );
+    )
 
-    observer.observe(ref.current);
+    observer.observe(ref.current)
 
-    return () => observer.disconnect();
-  }, [threshold, rootMargin]);
+    return () => observer.disconnect()
+  }, [threshold, rootMargin])
 
   const springs = useSprings(
     elements.length,
@@ -56,19 +61,22 @@ const BlurText = ({
       from: animationFrom || defaultFrom,
       to: inView
         ? async (next) => {
-          for (const step of (animationTo || defaultTo)) {
-            await next(step);
+            for (const step of animationTo || defaultTo) {
+              await next(step)
+            }
+            animatedCount.current += 1
+            if (
+              animatedCount.current === elements.length &&
+              onAnimationComplete
+            ) {
+              onAnimationComplete()
+            }
           }
-          animatedCount.current += 1;
-          if (animatedCount.current === elements.length && onAnimationComplete) {
-            onAnimationComplete();
-          }
-        }
         : animationFrom || defaultFrom,
       delay: i * delay,
       config: { easing },
     }))
-  );
+  )
 
   return (
     <p ref={ref} className={`blur-text ${className} flex flex-wrap`}>
@@ -83,7 +91,7 @@ const BlurText = ({
         </animated.span>
       ))}
     </p>
-  );
-};
+  )
+}
 
-export default BlurText;
+export default BlurText

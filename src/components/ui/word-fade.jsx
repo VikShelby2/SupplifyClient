@@ -1,10 +1,8 @@
-"use client";
+'use client'
 
-import { motion, Variants } from "framer-motion";
+import { motion, Variants } from 'framer-motion'
 
-import { cn } from "../../lib/utils";
-
-
+import { cn } from '../../lib/utils'
 
 export function WordFadeIn({
   words,
@@ -19,7 +17,7 @@ export function WordFadeIn({
   },
   className,
 }) {
-  const _words = words.split(" ");
+  const _words = words.split(' ')
 
   return (
     <motion.h1
@@ -27,15 +25,15 @@ export function WordFadeIn({
       initial="hidden"
       animate="visible"
       className={cn(
-        " items-center flex  from-white from-50% to-[#9c9c9c] bg-text bg-clip-text text-transparent text-center text-4xl  w-full font-bold pb-1  tracking-[-0.02em]",
-        className,
+        ' items-center flex  from-white from-50% to-[#9c9c9c] bg-text bg-clip-text text-transparent text-center text-4xl  w-full font-bold pb-1  tracking-[-0.02em]',
+        className
       )}
     >
       {_words.map((word, i) => (
         <motion.span key={word} variants={variants} custom={i}>
-          {word}{" "}
+          {word}{' '}
         </motion.span>
       ))}
     </motion.h1>
-  );
+  )
 }
