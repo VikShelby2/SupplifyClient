@@ -11,18 +11,14 @@ const Providers = ({ children }) => {
   console.log(process.env.GOOGLE_CLIENT_ID)
   return (
     <HeroUIProvider>
-      <GoogleOAuthProvider
-        clientId={
-          '359651328675-0h1s06dgceh6s1pemj861icvl7e87nqs.apps.googleusercontent.com'
-        }
-      >
+  
         <NextUIProvider>
           <RecoilRoot>
             <ToastProvider />
             <Provider store={store}>{children}</Provider>
           </RecoilRoot>
         </NextUIProvider>
-      </GoogleOAuthProvider>
+     
     </HeroUIProvider>
   )
 }
