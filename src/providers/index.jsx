@@ -8,7 +8,6 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import { Provider } from 'react-redux'
 import store from '../context/redux/store'
 const Providers = ({ children }) => {
-  console.log(process.env.GOOGLE_CLIENT_ID)
   return (
     <HeroUIProvider>
   
