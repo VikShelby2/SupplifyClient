@@ -6,7 +6,39 @@ import {
   DropdownSection,
 } from '@nextui-org/dropdown'
 import { cn } from '../../../lib/utils'
-
+import { StoreIcon } from '../../ui/dashboard/icon';
+export const navbardata= [
+  { name: 'Help Center', sentTo: '' },
+  { name: 'Changelog', sentTo: '' },
+  { name: 'Community forums', sentTo: '' },
+  { name: 'Hire a Supplify Partner', sentTo: '' },
+  { name: 'Manage account', sentTo: '' },
+  { name: 'Log out', sentTo: '' },
+]
+export function UserNavbarMenu({children, items, icon, name}) {
+  return (
+    <Dropdown classNames={{
+      content: "p-0 border-none border-divider bg-background w-auto    min-w-[300px]",
+    }} >
+      <DropdownTrigger>
+        {children}
+      </DropdownTrigger>
+      <DropdownMenu items={items} aria-label="Static Actions">
+        <DropdownItem color='secondary' key="new">
+                  <div className="w-full flex items-center gap-2">
+                    <img className="w-6 h-6" src={icon} /> <span>{name}</span>
+                  </div>
+                </DropdownItem>
+                <DropdownItem showDivider color='secondary' key="klev kari">
+                  <div className="w-full flex items-center gap-2">
+                    <StoreIcon className={"text-secondary group-hover:text-white"}/> <span className='text-secondary group-hover:text-white' >All Stores </span>
+                  </div>
+                </DropdownItem>
+      {items.map((item) => ( <DropdownItem color={item.name==='Log out' && 'danger'} key={item.name}>{item.name}</DropdownItem> ))}
+      </DropdownMenu>
+    </Dropdown>
+  );
+}
 const ProductsTabMenu = ({ trigger, toggleEdit, tab }) => {
   return (
     <Dropdown

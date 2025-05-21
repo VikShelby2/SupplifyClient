@@ -10,6 +10,7 @@ import { AuroraText } from '../../ui/animations/auratext'
 import { NotificationIcon, SearchIcon } from '../../ui/dashboard/icon'
 import { Bell } from 'lucide-react'
 import { useSidebar } from '../../ui/shadcn/sidebar'
+import { navbardata, UserNavbarMenu } from '../menus'
 
 export default function Navbar({ openMobile, backgroundColor }) {
   const store = useRecoilValue(storeAtom)
@@ -101,6 +102,12 @@ export default function Navbar({ openMobile, backgroundColor }) {
                   ) : (
                     <div className="">
                       {store.svgData ? (
+                        <UserNavbarMenu  
+                        items={navbardata}
+                        name={store.storeName}
+                        icon={dataUri}
+                  
+                        >
                         <Button isIconOnly radius="full">
                           {' '}
                           <Avatar
@@ -110,7 +117,7 @@ export default function Navbar({ openMobile, backgroundColor }) {
                             className="w-[30px] h-[30px]"
                             src={dataUri}
                           />
-                        </Button>
+                        </Button></UserNavbarMenu>
                       ) : (
                         <div className="relative w-8 h-8 bg-red-100 flex justify-center items-center rounded-lg">
                           <span>MS</span>
