@@ -47,14 +47,15 @@ const StoreForm = ({ setAnimationTime }) => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const res = await fetch('https://restcountries.com/v3.1/all')
-        const data = await res.json()
+        const res = await fetch('https://countriesnow.space/api/v0.1/countries/iso')
+        const { data } = await res.json()
         const formattedData = data.map((country) => ({
-          name: country.name.common,
-          currency: Object.keys(country.currencies || {})[0] || '',
-          flag: country.flags.svg,
+          name: country.name,
+          currency: country.Iso2, // This API doesn't provide currency directly
+          flag: `https://flagsapi.com/${country.Iso2}/flat/64.png`, // Use flag API
         }))
-        setCountries(formattedData)
+        setCountries(data)
+        console.log(data)
         setFilteredCountries(formattedData) // Initialize filtered list
       } catch (error) {
         console.error('Error fetching countries:', error)
@@ -62,6 +63,7 @@ const StoreForm = ({ setAnimationTime }) => {
     }
     fetchCountries()
   }, [])
+  
 
   const handleSearch = (input) => {
     if (!input) {

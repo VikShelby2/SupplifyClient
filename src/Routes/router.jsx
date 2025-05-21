@@ -1,4 +1,4 @@
-import { useRecoilValue } from 'recoil'
+  import { useRecoilValue } from 'recoil'
 
 import Home from '../pages/public/Home'
 import SignUp from '../pages/auth/SignUp'
@@ -17,6 +17,7 @@ import DashHome from '../pages/private/store/home'
 import CollectionPage from '../pages/private/store/product/collections'
 import Theme from '../pages/private/store/builder'
 import ProtectRoute from '../components/admin/Private/auth'
+import PageBuilder from '../pages/private/builder'
 
 export const RootRoute = () => {
   const routes = [{ path: '/', element: <Home /> }]
@@ -85,6 +86,14 @@ export const DashboardRoute = (loggedIn) => {
           <DashboardLayout isSmall={true} classNames={'mt-[60px] '}>
             <DashHome />
           </DashboardLayout>
+        </ProtectRoute>
+      ),
+    },
+    {
+      path: `/store-panel/builder`,
+      element: (
+        <ProtectRoute dashboard={true}>
+         <PageBuilder />
         </ProtectRoute>
       ),
     },
